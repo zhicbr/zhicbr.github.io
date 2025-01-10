@@ -19,7 +19,7 @@ username.github.io
 
 
 
-![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/posts/create%20a%20github.io%20website%20as%20your%20blog.assets/image1.png)
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image1.png)
 
 
 
