@@ -355,4 +355,53 @@ footer {
     .social-links {
         justify-content: center;
     }
+    .full-post {
+        background: var(--card-bg);
+        border-radius: 8px;
+        padding: 2rem;
+        box-shadow: 0 2px 4px var(--shadow-color);
+        margin: 2rem auto;
+        max-width: 800px;
+    }
+    
+    .full-post img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin: 1rem 0;
+        display: block;
+    }
+    
+    .full-post h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        color: var(--text-color);
+    }
+    
+    .full-post h2 {
+        font-size: 2rem;
+        margin: 2rem 0 1rem;
+        color: var(--text-color);
+    }
+    
+    .full-post h3 {
+        font-size: 1.5rem;
+        margin: 1.5rem 0 1rem;
+        color: var(--text-color);
+    }
+    
+    .full-post p {
+        margin-bottom: 1.5rem;
+        line-height: 1.8;
+    }
+    
+    .full-post ul, 
+    .full-post ol {
+        margin: 1rem 0 1.5rem 2rem;
+    }
+    
+    .full-post li {
+        margin-bottom: 0.5rem;
+    }
+    
 }
