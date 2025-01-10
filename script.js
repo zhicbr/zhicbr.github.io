@@ -1,4 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
+        // 初始化 markdown-it 及其插件
+        const md = window.markdownit({
+            html: true,
+            linkify: true,
+            typographer: true
+        })
+        .use(window.markdownitAnchor, {
+            permalink: true,
+            permalinkBefore: true,
+            permalinkSymbol: '§'
+        })
+        .use(window.markdownitTocDoneRight)
+        .use(window.markdownitHighlightjs);
     const themeToggle = document.querySelector('.theme-toggle');
     const body = document.body;
     const main = document.querySelector('main');
@@ -54,9 +67,14 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch(path);
             const markdown = await response.text();
-            const content = marked.parse(markdown);
+            const content = md.render(markdown);
             main.innerHTML = `<article class="post full-post">${content}</article>`;
             window.scrollTo(0, 0);
+            
+            // 高亮代码块
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
         } catch (error) {
             console.error('Error loading article:', error);
         }

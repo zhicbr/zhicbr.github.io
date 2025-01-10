@@ -327,6 +327,47 @@ footer {
     color: var(--text-color);
     opacity: 0.8;
 }
+/* 代码块样式 */
+.full-post pre {
+    background: #f6f8fa;
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+
+.full-post code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    font-size: 0.9em;
+}
+
+.full-post :not(pre) > code {
+    background: #f6f8fa;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+}
+
+/* 标题锚点样式 */
+.header-anchor {
+    float: left;
+    margin-left: -20px;
+    padding-right: 4px;
+    text-decoration: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.full-post h1:hover .header-anchor,
+.full-post h2:hover .header-anchor,
+.full-post h3:hover .header-anchor {
+    opacity: 1;
+}
+
+/* 暗色主题适配 */
+.dark-theme .full-post pre,
+.dark-theme .full-post :not(pre) > code {
+    background: #2d2d2d;
+}
 
 /* Responsive design */
 @media (max-width: 768px) {
