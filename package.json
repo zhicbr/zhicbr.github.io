@@ -1,0 +1,9 @@
+{
+  "name": "markdown-blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "dependencies": {
+    "marked": "^9.1.2"
+  }
+}
