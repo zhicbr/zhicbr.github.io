@@ -17,9 +17,9 @@ username.github.io
 ## 搭建博客基本框架
 使用bolt.new直接生成一个静态的博客网页，放入刚才的项目中，push到github上，然后访问username.github.io就可以看到自己的博客了。
 
-![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/posts/create a github.io website as your blog.assets/image1.png)
 
 
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/posts/create%20a%20github.io%20website%20as%20your%20blog.assets/image1.png)
 
 
 
