@@ -1,0 +1,26 @@
+[data-theme="dark"] {
+    --primary-color: #64b5f6;
+    --text-color: #e0e0e0;
+    --bg-color: #121212;
+    --nav-bg: #1e1e1e;
+    --card-bg: #1e1e1e;
+    --border-color: #333;
+}
+
+[data-theme="dark"] .article-card {
+    background: var(--card-bg);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .markdown-content {
+    background: var(--card-bg);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] code {
+    background: #2d2d2d;
+}
+
+[data-theme="dark"] pre {
+    background: #2d2d2d;
+}
