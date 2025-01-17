@@ -26,6 +26,15 @@
             "views": 1789,
             "file": "3.md",
             "featured": false
+        },
+        {
+            "id": 4,
+            "title": "使用github page托管网站",
+            "date": "2025-01-17",
+            "tags": ["网站", "前端"],
+            "views": 0,
+            "file": "make_a_website_like_this.md",
+            "featured": true
         }
     ]
 }
