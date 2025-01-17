@@ -72,13 +72,13 @@ export const router = {
             <div class="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="https://picsum.photos/1000/300?random=1" alt="Random Image 1">
+                        <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/1737119766339.jpg" alt="Random Image 1">
                     </div>
                     <div class="carousel-item">
-                        <img src="https://picsum.photos/1000/300?random=2" alt="Random Image 2">
+                        <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/1737119839503.png" alt="Random Image 2">
                     </div>
                     <div class="carousel-item">
-                        <img src="https://picsum.photos/1000/300?random=3" alt="Random Image 3">
+                        <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/1737120086778.jpeg" alt="Random Image 3">
                     </div>
                 </div>
             </div>
