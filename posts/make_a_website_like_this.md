@@ -27,11 +27,11 @@ username.github.io
 ## 关于图片
 
 将图片放到项目里，然后上传到github，图片就可以通过链接访问
-
-然后将博客里的链接换成上述链接就行了，例如：
-
-````
-https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/posts/create a github.io website as your blog.assets/image1.png
+然后将博客里的链接换成上述链接就行了
+即前缀(https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/)加上文件名
 
 ````
 
+## 更新博客
+在posts文件夹下添加.md文件，图片放到images文件夹推送后获取连接，
+在articles.json中添加新博客信息即可。
