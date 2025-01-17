@@ -30,7 +30,6 @@ username.github.io
 然后将博客里的链接换成上述链接就行了
 即前缀(https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/)加上文件名
 
-````
 
 ## 更新博客
 在posts文件夹下添加.md文件，图片放到images文件夹推送后获取连接，
