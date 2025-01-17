@@ -80,6 +80,9 @@ export const router = {
                     <div class="carousel-item">
                         <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/1737120086778.jpeg" alt="Random Image 3">
                     </div>
+                    <div class="carousel-item">
+                        <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/1737120461614.jpeg" alt="Random Image 3">
+                    </div>
                 </div>
             </div>
             <div class="typing-container"></div>
