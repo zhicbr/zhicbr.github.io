@@ -189,16 +189,15 @@ export const router = {
                 <section>
                     <h2>技能</h2>
                     <ul>
-                        <li>前端开发 (HTML, CSS, JavaScript)</li>
-                        <li>后端开发 (Node.js, Python)</li>
-                        <li>数据库设计</li>
+                        <li>前端开发 (vue3)</li>
+                        <li>后端开发 (Node.js, java)</li>
                         <li>UI/UX设计</li>
                     </ul>
                 </section>
                 <section>
                     <h2>联系我</h2>
-                    <p>Email: example@example.com</p>
-                    <p>GitHub: github.com/example</p>
+                    <p>Email: 2819579394@qq.com</p>
+                    <p>GitHub: github.com/zhicbr</p>
                 </section>
             </div>
         `;
