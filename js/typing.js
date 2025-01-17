@@ -1,9 +1,12 @@
 export function setupTyping() {
     const quotes = [
-        "生活不止眼前的苟且，还有诗和远方。",
-        "不要等待机会，而要创造机会。",
-        "最困难的时刻，也是离成功最近的时刻。",
-        "今天的付出是为了明天更好的收获。"
+        "只恐西风又惊秋，不觉暗中流年换。",
+        "Opportunity does not waste time with those who are unprepared.",
+        "活着本身就很妙，如果连这道理都不懂，怎么去探索更深的东西呢？",
+        "厚积薄发",
+        "天道酬勤",
+        "We live between the earth and sky;Like travelers we shall pass by."
+        
     ];
 
     const typingContainer = document.querySelector('.typing-container');
