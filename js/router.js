@@ -191,7 +191,6 @@ export const router = {
                     <ul>
                         <li>前端开发 (vue3)</li>
                         <li>后端开发 (Node.js, java)</li>
-                        <li>UI/UX设计</li>
                     </ul>
                 </section>
                 <section>
