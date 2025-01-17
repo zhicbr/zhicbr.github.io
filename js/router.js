@@ -81,7 +81,7 @@ export const router = {
                         <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/1737120086778.jpeg" alt="Random Image 3">
                     </div>
                     <div class="carousel-item">
-                        <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/1737120461614.jpeg" alt="Random Image 4">
+                        <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/1737120461614.jpg" alt="Random Image 4">
                     </div>
                 </div>
             </div>
