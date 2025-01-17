@@ -183,8 +183,8 @@ export const router = {
                     <p>我是一名热爱技术和创新的开发者，专注于Web开发和人工智能领域。</p>
                 </section>
                 <section>
-                    <h2>座右铭</h2>
-                    <blockquote>"持续学习，不断进步"</blockquote>
+                    <h2>也许</h2>
+                    <blockquote>"……"</blockquote>
                 </section>
                 <section>
                     <h2>技能</h2>
