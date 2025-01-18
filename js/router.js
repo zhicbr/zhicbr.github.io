@@ -56,7 +56,7 @@ export const router = {
                         </div>
                     </div>
                     <div class="article-views">
-                        <i class="fas fa-eye"></i> ${article.views} 次浏览
+                       <!-- <i class="fas fa-eye"></i> ${article.views} 次浏览 -->
                     </div>
                 </div>
             `).join('');
@@ -117,7 +117,7 @@ export const router = {
                                 </div>
                             </div>
                             <div class="article-views">
-                                <i class="fas fa-eye"></i> ${article.views} 次浏览
+                                <!-- <i class="fas fa-eye"></i> ${article.views} 次浏览 -->
                             </div>
                         </div>
                     `).join('')}
@@ -151,7 +151,7 @@ export const router = {
                     </h1>
                     <div class="article-meta">
                         <span class="date">${article.date}</span>
-                        <span class="views"><i class="fas fa-eye"></i> ${article.views} 次浏览</span>
+                        <!-- <span class="views"><i class="fas fa-eye"></i> ${article.views} 次浏览</span> -->
                         <div class="article-tags">
                             ${article.tags.map(tag => `
                                 <span class="tag">${tag}</span>
