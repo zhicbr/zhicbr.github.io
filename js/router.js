@@ -175,6 +175,11 @@ export const router = {
     getAboutPage() {
         return `
             <div class="about-container">
+            <!-- ___/|
+                 \o.O|
+                 (___)
+                   U      -->
+         
                 <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/profilephoto.jpg" alt="我的头像" class="avatar">
                 <h1>关于我</h1>
                 <p>欢迎来到我的个人博客！</p>
