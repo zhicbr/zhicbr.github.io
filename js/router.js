@@ -74,14 +74,14 @@ export const router = {
                     <div class="carousel-item active">
                         <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/1737119766339.jpg" alt="Random Image 1">
                     </div>
-                    <div class="carousel-item">
-                        <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/1737119839503.png" alt="Random Image 2">
+        <!--             <div class="carousel-item">
+                        <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/1737119839503.png" alt="Random Image ">
                     </div>
                     <div class="carousel-item">
-                        <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/1737120086778.jpeg" alt="Random Image 3">
-                    </div>
+                        <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/1737120086778.jpeg" alt="Random Image ">  
+                    </div>        -->
                     <div class="carousel-item">
-                        <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/1737120461614.jpg" alt="Random Image 4">
+                        <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/1737120461614.jpg" alt="Random Image 2">
                     </div>
                 </div>
             </div>
