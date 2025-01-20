@@ -18,6 +18,15 @@
             "views":0,
             "file":"deploy_website_server.md",
             "featured":false
+        },
+        {
+            "id":6,
+            "title":"Git使用",
+            "date":"2025-01-20",
+            "tags":["Git"],
+            "views":0,
+            "file":"git_usage_tips.md",
+            "featured":false
         }
     ]
 }
