@@ -134,9 +134,11 @@ git config --global -l
 
 
 
-另可以修改host文件实现访问github。
-
-
+另可以修改hosts文件实现访问github。
+hosts文件位置："C:\Windows\System32\drivers\etc\hosts"
+在文件末尾添加
+20.205.243.166 github.com
+ip地址通过ping查询，两种都设置可。
 
 
 
