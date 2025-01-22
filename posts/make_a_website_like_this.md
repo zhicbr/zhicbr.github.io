@@ -34,3 +34,4 @@ username.github.io
 ## 更新博客
 在posts文件夹下添加.md文件，图片放到images文件夹推送后获取连接，
 在articles.json中添加新博客信息即可。
+json中的信息不要忘记.md后缀

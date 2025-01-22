@@ -2,17 +2,11 @@
 
 由于之前已经使用过idea和as，android sdk，和jdk已经下载了。
 
-
-
 [解决android sdk中找不到tools目录Android sdkmanager tool not found (D:\Android\SDK\tools\bin\sdkmanager)._android sdk安装没有tools-CSDN博客](https://blog.csdn.net/qq_36983458/article/details/105194433)
 
 sdkManager位置："E:\development\Android\sdk\tools\bin\sdkmanager.bat"
 
-
-
 flutter的SDK通过官网下载
-
-
 
 flutter入门问题
 
