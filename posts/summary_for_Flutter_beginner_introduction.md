@@ -1,5 +1,3 @@
-
-
 ## 开始之前
 
 由于之前已经使用过idea和as，android sdk，和jdk已经下载了。
