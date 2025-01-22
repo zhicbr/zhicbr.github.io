@@ -27,6 +27,15 @@
             "views":0,
             "file":"git_usage_tips.md",
             "featured":false
+        },
+        {
+            "id":7,
+            "title":"Flutter初尝试",
+            "date":"2025-01-22",
+            "tags":["Flutter","Dart"],
+            "views":0,
+            "file":"summary_for_Flutter_beginner_introduction",
+            "featured":false
         }
     ]
 }
