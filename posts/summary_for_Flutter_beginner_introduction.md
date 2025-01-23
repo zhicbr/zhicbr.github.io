@@ -123,6 +123,12 @@ flutter run
 记得在run之前连接手机并开启usb调试，就可以在手机上测试。或者使用网页/桌面应用。
 
 
+## 依赖
+在pubspec.yaml中添加依赖
+
+flutter pub get 下载依赖
+
+
 
 
 
