@@ -16,34 +16,7 @@ class MobileRouter {
         document.head.appendChild(viewportMeta);
     }
 
-    setupNavigation() {
-        const navToggle = document.createElement('div');
-        navToggle.className = 'mobile-nav-toggle';
-        navToggle.innerHTML = '<i class="fas fa-bars"></i>';
-        document.querySelector('.nav-content').appendChild(navToggle);
 
-        const mobileMenu = document.createElement('div');
-        mobileMenu.className = 'mobile-menu';
-        mobileMenu.innerHTML = `
-            <ul>
-                <li><a href="#home">首页</a></li>
-                <li><a href="#articles">文章</a></li>
-                <li><a href="#about">关于我</a></li>
-            </ul>
-        `;
-        document.body.appendChild(mobileMenu);
-
-        navToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!navToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
-                mobileMenu.classList.remove('active');
-            }
-        });
-    }
 
     handleLocation() {
         const hash = window.location.hash.slice(1) || 'home';
