@@ -141,7 +141,18 @@ export const router = {
 
             const markdownResponse = await fetch(`posts/${article.file}`);
             const markdownContent = await markdownResponse.text();
-            const htmlContent = marked.parse(markdownContent);
+            marked.setOptions({
+                breaks: true,
+                gfm: true,
+                highlight: function(code, lang) {
+                    return `<pre><code class="hljs ${lang}">${code}</code></pre>`;
+                }
+            });
+            // Convert multiple newlines to <br> tags
+            const htmlContent = marked.parse(markdownContent
+                .replace(/\n\s*\n/g, '\n\n')
+                .replace(/(\n{2,})/g, '<br>$1')
+            );
 
             return `
                 <div class="article-detail">
