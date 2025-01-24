@@ -16,7 +16,16 @@ class MobileRouter {
         document.head.appendChild(viewportMeta);
     }
 
+    setupNavigation() {
+        const navToggle = document.createElement('div');
+        navToggle.className = 'mobile-nav-toggle';
+        navToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        document.querySelector('.nav-content').appendChild(navToggle);
 
+        navToggle.addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    }
 
     handleLocation() {
         const hash = window.location.hash.slice(1) || 'home';
