@@ -36,6 +36,16 @@
             "views":0,
             "file":"summary_for_Flutter_beginner_introduction.md",
             "featured":false
+        },
+        {
+            "id":8,
+            "title":"大模型api及应用",
+            "date":"2025-01-24",
+            "tags":["大模型","AI"],
+            "views":0,
+            "file":"Using_API_to_Call_AI_Models_and_Applications.md",
+            "featured":false
         }
+    ]
     ]
 }
