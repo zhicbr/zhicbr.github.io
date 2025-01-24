@@ -35,3 +35,4 @@ username.github.io
 在posts文件夹下添加.md文件，图片放到images文件夹推送后获取连接，
 在articles.json中添加新博客信息即可。
 json中的信息不要忘记.md后缀
+和typora中不同的是，代码块前后都要加上```标记,当然，最好是在typora中编辑文章
