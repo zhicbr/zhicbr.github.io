@@ -45,6 +45,15 @@
             "views":0,
             "file":"Using_API_to_Call_AI_Models_and_Applications.md",
             "featured":false
+        },
+        {
+            "id":9,
+            "title":"命令行快捷键打开vscode和cursor",
+            "date":"2025-02-11",
+            "tags":["奇技淫巧"],
+            "views":0,
+            "file":"命令行快捷键.md",
+            "featured":false
         }
     ]
     
