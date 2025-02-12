@@ -54,6 +54,15 @@
             "views":0,
             "file":"Command_Line_Shortcut_Settings.md",
             "featured":false
+        },
+        {
+            "id":9,
+            "title":"electron入门项目",
+            "date":"2025-02-12",
+            "tags":["electron"],
+            "views":0,
+            "file":"Electron_introductory_project.md",
+            "featured":false
         }
     ]
     
