@@ -28,6 +28,12 @@ deepseek-chat
 OpenAI Compatible
 https://yunwu.ai/v1
 claude-3-5-sonnet-20240620
+
+### siliconflow
+OpenAI Compatible
+https://api.siliconflow.cn/v1
+deepseek-ai/DeepSeek-R1
+
 都可以添加：
 custom instructions:speak in chinese
 
