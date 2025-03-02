@@ -103,11 +103,12 @@ export const router = {
             
             return `
                 <h1>文章列表</h1>
-                <div class="article-grid">
+                <div class="article-list">
                     ${articles.map(article => `
                         <div class="article-card" onclick="router.navigate('articles', {id: '${article.id}'})">
                             ${article.featured ? '<div class="featured-badge"><i class="fas fa-star"></i> 精选</div>' : ''}
-                            <h3>${article.title}</h3>
+                            <h2 class="article-title">${article.title}</h2>
+                            <p class="article-excerpt">${article.excerpt || '文章简介...'}</p>
                             <div class="article-meta">
                                 <span>${article.date}</span>
                                 <div class="article-tags">
@@ -115,9 +116,6 @@ export const router = {
                                         <span class="tag">${tag}</span>
                                     `).join('')}
                                 </div>
-                            </div>
-                            <div class="article-views">
-                                <!-- <i class="fas fa-eye"></i> ${article.views} 次浏览 -->
                             </div>
                         </div>
                     `).join('')}

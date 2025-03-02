@@ -1,6 +1,5 @@
 {
     "articles": [
-
         {
             "id": 4,
             "title": "使用github page托管网站",
@@ -8,7 +7,8 @@
             "tags": ["网站", "前端"],
             "views": 0,
             "file": "make_a_website_like_this.md",
-            "featured": true
+            "featured": true,
+            "excerpt": "使用GitHub Pages快速搭建个人网站过程记录"
         },
         {
             "id":5,
@@ -17,7 +17,8 @@
             "tags":["网站","部署"],
             "views":0,
             "file":"deploy_website_server.md",
-            "featured":false
+            "featured":false,
+            "excerpt": "将springboot+vue项目部署到阿里云服务器的过程记录"
         },
         {
             "id":6,
@@ -26,7 +27,8 @@
             "tags":["Git"],
             "views":0,
             "file":"git_usage_tips.md",
-            "featured":false
+            "featured":false,
+            "excerpt": "Git使用总结"
         },
         {
             "id":7,
@@ -35,7 +37,8 @@
             "tags":["Flutter","Dart"],
             "views":0,
             "file":"summary_for_Flutter_beginner_introduction.md",
-            "featured":false
+            "featured":false,
+            "excerpt": "Flutter入门项目记录"
         },
         {
             "id":8,
@@ -44,7 +47,8 @@
             "tags":["大模型","AI"],
             "views":0,
             "file":"Using_API_to_Call_AI_Models_and_Applications.md",
-            "featured":false
+            "featured":false,
+            "excerpt": "调用大模型API的记录"
         },
         {
             "id":9,
@@ -53,7 +57,8 @@
             "tags":["奇技淫巧"],
             "views":0,
             "file":"Command_Line_Shortcut_Settings.md",
-            "featured":false
+            "featured":false,
+            "excerpt": "如题"
         },
         {
             "id":10,
@@ -62,7 +67,8 @@
             "tags":["electron"],
             "views":0,
             "file":"Electron_introductory_project.md",
-            "featured":false
+            "featured":false,
+            "excerpt": "使用Electron构建你的第一个桌面应用"
         },
         {
             "id":11,
@@ -71,7 +77,8 @@
             "tags":["uniapp","HbuilderX"],
             "views":0,
             "file":"Uniapp_Introduction_Cases.md",
-            "featured":false
+            "featured":false,
+            "excerpt": "跨平台开发：Uniapp入门实战教程"
         },
         {
             "id":12,
@@ -80,7 +87,8 @@
             "tags":["linux"],
             "views":0,
             "file":"linux_ubuntu.md",
-            "featured":false
+            "featured":false,
+            "excerpt": "Linux系统安装记录"
         },
         {
             "id":13,
@@ -89,8 +97,8 @@
             "tags":["Express","Node.js"],
             "views":0,
             "file":"Getting_Started_with_Express.md",
-            "featured":false
+            "featured":false,
+            "excerpt": "使用Express快速搭建Node.js后端服务"
         }
     ]
-    
 }
