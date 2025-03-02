@@ -1,3 +1,5 @@
+import { marked } from 'marked';
+
 export const router = {
     init() {
         this.handleLocation();
@@ -144,15 +146,25 @@ export const router = {
             marked.setOptions({
                 breaks: true,
                 gfm: true,
+                headerIds: false,
                 highlight: function(code, lang) {
-                    return `<pre><code class="hljs ${lang}">${code}</code></pre>`;
+                    const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+                    return hljs.highlight(code, { language }).value;
                 }
             });
-            // Convert multiple newlines to <br> tags
-            const htmlContent = marked.parse(markdownContent
-                .replace(/\n\s*\n/g, '\n\n')
-                .replace(/(\n{2,})/g, '<br>$1')
-            );
+
+            // Load highlight.js styles and initialize
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css';
+            document.head.appendChild(link);
+
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js';
+            script.onload = () => hljs.highlightAll();
+            document.head.appendChild(script);
+
+            const htmlContent = marked.parse(markdownContent);
 
             return `
                 <div class="article-detail">
