@@ -47,23 +47,176 @@ chenbaorui@anlinling:~$
 
 下载虚拟机，下载ubuntu iso，安装到G盘
 
+下载后，选择中文，这时候文件夹是中文。在设置里修改语言为英文，重启后，会提示是将文件夹切换为英文，选择是，再将系统语言切换为中文，重启，系统仍然提示是否切换文件夹为中文，选择否。这样文件夹就是英文，而系统是中文，也有中文输入法。
 
 
 
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/PixPin_2025-03-05_14-32-11.png)
 
 
 
+ubuntu复制粘贴：
+
+ctrl+shift+c
+
+ctrl+shift+v
+
+或：左键选中，滚轮点击后复制
+
+虚拟机和主机共享剪切板（[VMware虚拟机和主机间复制粘贴共享剪贴板 - 知乎](https://zhuanlan.zhihu.com/p/665154528)）：
+
+安装open-vm-tools
+
+```text
+sudo apt-get install open-vm-tools
+```
+
+安装open-vm-tools-desktop
+
+```text
+sudo apt-get install open-vm-tools-desktop
+```
+
+这样就可以共享剪切板了
+
+### docker
+
+### 安装
+
+sudo snap install docker
+
+docker version
+
+如果报错：permission denied while trying to connect to the Docker daemon socket
+
+按照以下命令,username换成自己的用户名
+
+```
+sudo groupadd docker               #添加用户组
+sudo gpasswd -a username docker    #将当前用户添加至用户组
+newgrp docker                      #更新用户组
+```
+
+设置后一定要重启（使用移动硬盘不要动，移动就断了，然后只好重启，不过也正是这样才发现设置后必须重启）
+
+[linux中docker报错：ERROR: Got permission denied while trying to connect to the Docker daemon socket。-CSDN博客](https://blog.csdn.net/qq_45097352/article/details/116105246)
 
 
 
+```
+$ docker version
+Client:
+ Version:           27.2.0
+ API version:       1.47
+ Go version:        go1.21.13
+ Git commit:        3ab4256
+ Built:             Tue Dec 17 12:23:46 2024
+ OS/Arch:           linux/amd64
+ Context:           default
+
+Server:
+ Engine:
+  Version:          27.2.0
+  API version:      1.47 (minimum version 1.24)
+  Go version:       go1.21.13
+  Git commit:       3ab5c7d
+  Built:            Tue Dec 17 12:24:21 2024
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          v1.7.21
+  GitCommit:        472731909fa34bd7bc9c087e4c27943f9835f111
+ runc:
+  Version:          1.1.13
+  GitCommit:        
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+chenbaorui@chenbaorui-VMware-Virtual-Platform:~$ 
+
+
+```
+
+### 使用docker镜像下载jupyter：
+
+[Docker/DockerHub 国内镜像源/加速列表（3月25日更新-长期维护） - 知乎](https://zhuanlan.zhihu.com/p/24461370776)
+
+[毫秒镜像](https://1ms.run/)
+
+```text
+docker pull docker.1ms.run/jupyter/base-notebook
+```
+
+### 命令
+
+docker images 查看已有镜像
+
+docker run 基于该镜像创建并运行容器
+
+docker ps    查看正在运行的容器
+
+docker logs <容器 ID 或名称>   查看对应容器的日志
+
+docker stop <容器 ID 或容器名>    停止容器
+
+docker rmi <镜像 ID 或镜像名:标签>     删除本地镜像
 
 
 
+```
+docker ps
+```
+
+能看到：
+
+```
+CONTAINER ID   IMAGE                                  COMMAND                   CREATED          STATUS                             PORTS                                       NAMES
+e6cc0987bbf8   docker.1ms.run/jupyter/base-notebook   "tini -g -- start-no…"   13 seconds ago   Up 10 seconds (health: starting)   0.0.0.0:8888->8888/tcp, :::8888->8888/tcp   beautiful_cannon
+
+```
+
+这个names是分配的，下面的logs就用这个beautiful_cannon或者id
+
+```
+docker run -p 8888:8888 -d docker.1ms.run/jupyter/base-notebook
+docker logs beautiful_cannon
+
+```
+
+找到：
+
+​      http://127.0.0.1:8888/lab?token=35547aea047d7f8ebb1988935a3d3e7f6d711801b4468c5b
+
+在浏览器里输入网址：http://localhost:8888
+
+需要密码就是上面的token
+
+输入后就进入了jupyter notebook。
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250305163141656.png)
+
+### 通过宿主机访问
+
+没成功呢，下次试试
 
 
 
+### qiskit
 
+首次
 
+```
+docker pull docker.1ms.run/aldrinebaroi/qiskit
 
+1) docker run -p 8888:8888 aldrinebaroi/qiskit
+使用镜像应为：docker run -p 8888:8888 -d docker.1ms.run/aldrinebaroi/qiskit
+2) http://localhost:8888/lab?token=qiskit
+```
 
+非首次
 
+```
+docker start 上次创建的镜像编号
+
+http://localhost:8888/lab?token=qiskit
+```
