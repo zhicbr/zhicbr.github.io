@@ -39,7 +39,7 @@ chenbaorui@anlinling:~$
 
 
 
-
+由于虚拟机“详见下文冲突”，关闭了wsl，应该再次开启就可以了。
 
 
 
@@ -220,3 +220,73 @@ docker start 上次创建的镜像编号
 
 http://localhost:8888/lab?token=qiskit
 ```
+
+
+
+docker ps -a  看所有容器
+
+
+
+
+
+
+
+## 冲突
+
+由于虚拟机里的ubuntu经常卡死，开启了：
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250308111345401.png)
+
+
+
+但是虚拟机开机时提示“此平台不支持虚拟化的 Intel VT-x/EPT”。
+
+
+
+好像wsl和虚拟机冲突？？
+
+以下是修改的地方：
+
+关闭了
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250308104417041.png)
+
+禁止了
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250308104514056.png)
+
+在cmd以管理员身份运行：
+
+修改系统启动配置来禁用 Hyper-V 虚拟化平台的自动启动，告诉 Windows 在启动时不加载 Hyper-V 虚拟机监控程序（hypervisor）。这在一些情况下是必要的，比如当你想要运行某些不兼容 Hyper-V 的软件或游戏，或者你需要使用其他类型的虚拟化技术（如 VMware 或 VirtualBox），而这些技术可能与 Hyper-V 不能很好地共存。
+
+```
+bcdedit /set hypervisorlaunchtype off
+```
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250308105307959.png)
+
+
+
+重启
+
+虚拟化：
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/1737119909998.jpg)
+
+systmeinfo（之前Hyper-V要求显示“已检测到虚拟机监控程序,将不显示Hyper-V”）![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250308110124571.png)
+
+
+
+现在开启了虚拟化Intel VT-x/EPT也能开机了
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250308110502100.png)
+
+
+
+之后，到目前为止没有卡死的情况出现
+
+
+
+参考：
+
+[Windows11VMware 17 运行虚拟机报错 “此平台不支持虚拟化的 Intel VT-x/EPT_vmware此平台不支持虚拟化的 intel vt-CSDN博客](https://blog.csdn.net/m0_62166372/article/details/139127960)
