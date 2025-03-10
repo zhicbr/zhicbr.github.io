@@ -63,6 +63,8 @@ ctrl+shift+v
 
 或：左键选中，滚轮点击后复制
 
+虚拟机中全屏：ctrl+alt+enter
+
 虚拟机和主机共享剪切板（[VMware虚拟机和主机间复制粘贴共享剪贴板 - 知乎](https://zhuanlan.zhihu.com/p/665154528)）：
 
 安装open-vm-tools
@@ -227,6 +229,28 @@ docker ps -a  看所有容器
 
 
 
+## shell
+
+```
+touch test.sh
+vim test.sh
+在vim中写入：
+#!/bin/bash
+echo "hello world"
+显示权限：
+ll test.sh
+修改权限：
+chmod +x test.sh
+执行：
+./test.sh
+
+
+```
+
+
+
+
+
 
 
 
@@ -287,6 +311,96 @@ systmeinfo（之前Hyper-V要求显示“已检测到虚拟机监控程序,将�
 
 
 
+## 虚拟机中使用虚拟专用网络
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250309155421668.png)
+
+ipconfig  查ipv4地址： 192.168.65.1
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250309154429021.png)
+
+clash中的端口号，开启LAN
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250309155155029.png)
+
+系统设置->网络->网络代理，前面填写上面的ip，后面填写vpn的端口
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250309154848899.png)
+
+即可在虚拟机中使用vpn
+
+## 扩容
+
+ubuntu20G快要用完了，需要扩容
+
+
+
+[VMware虚拟机扩容磁盘，有很详细图文_虚拟机硬盘空间-CSDN博客](https://blog.csdn.net/hktkfly6/article/details/123302335)
+
+
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250310194148401.png)
+
+
+
+
+
+
+
+关机后，
+
+
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250310194332160.png)
+
+在虚拟机中下载sudo apt-get install gparted，
+
+进入gparted
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250310195018937.png)
+
+主分区：
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250310195355944.png)
+
+留2000
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250310195535282.png)
+
+
+
+点击应用
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250310195934468.png)
+
+扩容后：
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250310200236595.png)
+
+
+
+由于我一开始并没有逻辑空间和扩展空间，我之后只是留了2000mb，并没有创建……
+
+
+
+
+
+
+
 参考：
 
+[VMware虚拟机和主机间复制粘贴共享剪贴板 - 知乎](https://zhuanlan.zhihu.com/p/665154528)
+
+[linux中docker报错：ERROR: Got permission denied while trying to connect to the Docker daemon socket。-CSDN博客](https://blog.csdn.net/qq_45097352/article/details/116105246)
+
+[Docker/DockerHub 国内镜像源/加速列表（3月25日更新-长期维护） - 知乎](https://zhuanlan.zhihu.com/p/24461370776)
+
+[【Linux】自定义WSL2安装位置，安装到其他磁盘(非C盘)_wsl2安装到其他盘-CSDN博客](https://blog.csdn.net/weixin_48076899/article/details/135214749)
+
 [Windows11VMware 17 运行虚拟机报错 “此平台不支持虚拟化的 Intel VT-x/EPT_vmware此平台不支持虚拟化的 intel vt-CSDN博客](https://blog.csdn.net/m0_62166372/article/details/139127960)
+
+[VMware Ubuntu虚拟机 使用主机VPN 配置（简单、可行）-CSDN博客](https://blog.csdn.net/nomoremorphine/article/details/138738065)
+
+[VMware虚拟机经常性卡死，打开运行一段时间后卡死，CPU占比增至100% - 知乎](https://zhuanlan.zhihu.com/p/28163971030)
+
+[VMware虚拟机扩容磁盘，有很详细图文_虚拟机硬盘空间-CSDN博客](https://blog.csdn.net/hktkfly6/article/details/123302335)
