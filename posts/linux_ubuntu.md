@@ -387,7 +387,7 @@ ubuntu20G快要用完了，需要扩容
 
 
 
-参考：
+## 参考：
 
 [VMware虚拟机和主机间复制粘贴共享剪贴板 - 知乎](https://zhuanlan.zhihu.com/p/665154528)
 
