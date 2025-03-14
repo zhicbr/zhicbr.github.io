@@ -150,6 +150,7 @@ export const router = {
                     </h1>
                     <div class="article-meta">
                         <span class="date">${article.date}</span>
+                     ${article.lastEdited ? `<span class="last-edited">最后编辑时间: ${article.lastEdited}</span>` : ''}
                         <!-- <span class="views"><i class="fas fa-eye"></i> ${article.views} 次浏览</span> -->
                         <div class="article-tags">
                             ${article.tags.map(tag => `
