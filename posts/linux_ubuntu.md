@@ -53,9 +53,15 @@ chenbaorui@anlinling:~$
 
 ![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/PixPin_2025-03-05_14-32-11.png)
 
+### 快捷操作
 
+#### 打开/关闭终端
 
-ubuntu复制粘贴：
+ctrl+alt+T      打开
+
+ctrl+D            关闭
+
+#### 复制粘贴：
 
 ctrl+shift+c
 
@@ -63,9 +69,17 @@ ctrl+shift+v
 
 或：左键选中，滚轮点击后复制
 
-虚拟机中全屏：ctrl+alt+enter
+#### 切换输入法
 
-虚拟机和主机共享剪切板（[VMware虚拟机和主机间复制粘贴共享剪贴板 - 知乎](https://zhuanlan.zhihu.com/p/665154528)）：
+shift
+
+#### 虚拟机中全屏/退出
+
+ctrl+alt+enter
+
+#### 虚拟机和宿主机共享剪切板
+
+（[VMware虚拟机和主机间复制粘贴共享剪贴板 - 知乎](https://zhuanlan.zhihu.com/p/665154528)）：
 
 安装open-vm-tools
 
@@ -81,9 +95,122 @@ sudo apt-get install open-vm-tools-desktop
 
 这样就可以共享剪切板了
 
+
+
+#### 虚拟机/宿主机切换
+
+ctrl+alt退出虚拟机，ctrl+G 进入虚拟机
+
+
+
+#### 虚拟机/宿主机文件传输
+
+[VM：如何向vmware虚拟机中传输文件(或者共享文件夹)之详细攻略(图文教程)_本地向虚拟机传输文件-CSDN博客](https://blog.csdn.net/weixin_48384182/article/details/109693775)
+
+使用共享文件夹的方法
+
+似乎我的VMware tools已经安装了
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250312211150475.png)
+
+
+
+添加后，还需要挂载
+
+[VMware中Linux虚拟机挂载主机共享文件夹的方法_虚拟机手工挂载文件夹-CSDN博客](https://blog.csdn.net/weixin_39877717/article/details/105419140)
+
+[VMWare Linux 虚拟机配置永久共享文件夹 | Eclipsed-Y-Blog](https://eclipsed-y.github.io/blogs/vmware-shared/)
+
+```
+sudo vmhgfs-fuse .host:/ /mnt/hgfs -o subtype=vmhgfs-fuse,allow_other 
+```
+
+共享文件夹此时在/mnt/hgfs
+
+重启后失效。
+
+使用开机自动执行的办法伪永久：
+
+打开/etc/fstab
+
+```
+sudo nano fstab
+```
+
+在fstab末尾添加：
+
+```
+.host:/ /mnt/hgfs fuse.vmhgfs-fuse allow_other,subtype=vmhgfs-fuse 0 0
+```
+
+在桌面添加指向共享文件夹的快捷方式：
+
+```sh
+ln -s /mnt/hgfs/VMware_Windows_Shared_Folders /home/chenbaorui/Desktop
+```
+
+
+
+
+
+### 虚拟机联网
+
+开启VMnet8
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250314083902326.png)
+
+虚拟网络编辑器
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250314082245306.png)
+
+nat设置子网ip和网关
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250314083137212.png)
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250314083247487.png)
+
+设置子网中能用的ip范围
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250314083448463.png)
+
+
+
+虚拟机使用nat模式
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250314083037120.png)
+
+
+
+[VMware虚拟机网络配置-NAT篇 - 知乎](https://zhuanlan.zhihu.com/p/130984945)
+
+### linux常见命令
+
+```
+cd
+ll
+ls
+touch
+mkdir
+nano
+cat
+vim
+rm
+pwd
+chmod +x [文件名]      给文件增加可执行权限。另外，ll命令后看到的文件名后带有*号，表明有可执行权限
+./[文件名]             执行文件
+```
+
+
+
+
+
+
+
+
+
 ### docker
 
-### 安装
+#### 安装
 
 sudo snap install docker
 
@@ -139,7 +266,7 @@ chenbaorui@chenbaorui-VMware-Virtual-Platform:~$
 
 ```
 
-### 使用docker镜像下载jupyter：
+#### 使用docker镜像下载jupyter
 
 [Docker/DockerHub 国内镜像源/加速列表（3月25日更新-长期维护） - 知乎](https://zhuanlan.zhihu.com/p/24461370776)
 
@@ -149,7 +276,7 @@ chenbaorui@chenbaorui-VMware-Virtual-Platform:~$
 docker pull docker.1ms.run/jupyter/base-notebook
 ```
 
-### 命令
+#### 常见docker命令
 
 docker images 查看已有镜像
 
@@ -197,13 +324,11 @@ docker logs beautiful_cannon
 
 ![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250305163141656.png)
 
-### 通过宿主机访问
+#### 通过宿主机访问
 
 没成功呢，下次试试
 
-
-
-### qiskit
+#### qiskit
 
 首次
 
@@ -255,7 +380,7 @@ chmod +x test.sh
 
 
 
-## 冲突
+## wsl和vmware冲突
 
 由于虚拟机里的ubuntu经常卡死，开启了：
 
@@ -379,23 +504,67 @@ ubuntu20G快要用完了，需要扩容
 
 
 
-由于我一开始并没有逻辑空间和扩展空间，我之后只是留了2000mb，并没有创建……
+由于我一开始并没有逻辑空间和扩展空间，我之后只是留了2000mb，并没有创建……## 
+
+## C/C++编程
+
+C++:
+
+安装g++
+
+```
+sudo apt update
+sudo apt install g++
+```
+
+编写程序hello.cpp
+
+编译
+
+```
+g++ hello.cpp -o hello        // -o用于生成指定的可执行文件的名称，即output
+```
+
+执行
+
+```
+./hello
+```
+
+即可看到经典起手式hello world！
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250312204808397.png)
+
+C语言：
+
+linux有C语言编译器gcc：
+
+```
+gcc --version
+```
+
+创建文件 hello.c
+
+编译执行
+
+```
+gcc hello.c -o hello_c
+./hello_c
+```
 
 
 
 
 
+## 参考
 
-
-## 参考：
+[【Linux】自定义WSL2安装位置，安装到其他磁盘(非C盘)_wsl2安装到其他盘-CSDN博客](https://blog.csdn.net/weixin_48076899/article/details/135214749)
 
 [VMware虚拟机和主机间复制粘贴共享剪贴板 - 知乎](https://zhuanlan.zhihu.com/p/665154528)
 
 [linux中docker报错：ERROR: Got permission denied while trying to connect to the Docker daemon socket。-CSDN博客](https://blog.csdn.net/qq_45097352/article/details/116105246)
 
 [Docker/DockerHub 国内镜像源/加速列表（3月25日更新-长期维护） - 知乎](https://zhuanlan.zhihu.com/p/24461370776)
-
-[【Linux】自定义WSL2安装位置，安装到其他磁盘(非C盘)_wsl2安装到其他盘-CSDN博客](https://blog.csdn.net/weixin_48076899/article/details/135214749)
 
 [Windows11VMware 17 运行虚拟机报错 “此平台不支持虚拟化的 Intel VT-x/EPT_vmware此平台不支持虚拟化的 intel vt-CSDN博客](https://blog.csdn.net/m0_62166372/article/details/139127960)
 
@@ -404,3 +573,11 @@ ubuntu20G快要用完了，需要扩容
 [VMware虚拟机经常性卡死，打开运行一段时间后卡死，CPU占比增至100% - 知乎](https://zhuanlan.zhihu.com/p/28163971030)
 
 [VMware虚拟机扩容磁盘，有很详细图文_虚拟机硬盘空间-CSDN博客](https://blog.csdn.net/hktkfly6/article/details/123302335)
+
+[VM：如何向vmware虚拟机中传输文件(或者共享文件夹)之详细攻略(图文教程)_本地向虚拟机传输文件-CSDN博客](https://blog.csdn.net/weixin_48384182/article/details/109693775)
+
+[VMware中Linux虚拟机挂载主机共享文件夹的方法_虚拟机手工挂载文件夹-CSDN博客](https://blog.csdn.net/weixin_39877717/article/details/105419140)
+
+[VMWare Linux 虚拟机配置永久共享文件夹 | Eclipsed-Y-Blog](https://eclipsed-y.github.io/blogs/vmware-shared/)
+
+[VMware虚拟机网络配置-NAT篇 - 知乎](https://zhuanlan.zhihu.com/p/130984945)
