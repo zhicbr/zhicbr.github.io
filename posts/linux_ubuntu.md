@@ -61,7 +61,7 @@ ctrl+alt+T      打开
 
 ctrl+D            关闭
 
-#### 复制粘贴：
+#### 复制粘贴
 
 ctrl+shift+c
 
@@ -145,6 +145,10 @@ sudo nano fstab
 
 在桌面添加指向共享文件夹的快捷方式：
 
+```
+ln -s /mnt/hgfs/[共享文件夹名称] /home/chenbaorui/Desktop
+```
+
 ```sh
 ln -s /mnt/hgfs/VMware_Windows_Shared_Folders /home/chenbaorui/Desktop
 ```
@@ -182,6 +186,10 @@ nat设置子网ip和网关
 
 
 [VMware虚拟机网络配置-NAT篇 - 知乎](https://zhuanlan.zhihu.com/p/130984945)
+
+### 代理服务器拒绝连接？
+
+重启就好，宿主机也要重启。不知道发生了什么( ˃̣̣̥o˂̣̣̥ )
 
 ### linux常见命令
 
