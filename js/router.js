@@ -20,6 +20,58 @@ export const router = {
             import('./carousel.js').then(module => module.setupCarousel());
             import('./typing.js').then(module => module.setupTyping());
         }
+        if (page === 'articles' && id) {
+            this.setupTOC();
+        }
+    },
+
+    setupTOC() {
+        const content = document.querySelector('.markdown-content');
+        const tocContainer = document.querySelector('.toc');
+        if (!content || !tocContainer) return;
+    
+        const headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        let tocHTML = '<ul>';
+    
+        headings.forEach((heading, index) => {
+            const level = parseInt(heading.tagName[1]);
+            const id = `heading-${index}`;
+            heading.id = id;
+            
+            tocHTML += `
+                <li style="padding-left: ${(level - 1) * 16}px">
+                    <a href="#${id}">${heading.textContent}</a>
+                </li>`;
+        });
+    
+        tocHTML += '</ul>';
+        tocContainer.innerHTML = tocHTML;
+    
+        // 平滑滚动
+        const links = tocContainer.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').slice(1);
+                document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    
+        // 高亮当前活动标题
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        links.forEach(link => link.classList.remove('active'));
+                        const activeLink = tocContainer.querySelector(`a[href="#${entry.target.id}"]`);
+                        if (activeLink) activeLink.classList.add('active');
+                    }
+                });
+            },
+            { rootMargin: '-100px 0px -50% 0px' }
+        );
+    
+        headings.forEach(heading => observer.observe(heading));
     },
 
     async getContent(page, id) {
@@ -143,6 +195,8 @@ export const router = {
             const htmlContent = marked.parse(markdownContent);
 
             return `
+            <div class="article-detail-container">
+                <div class="toc"></div>
                 <div class="article-detail">
                     <h1>
                         ${article.featured ? '<i class="fas fa-star featured-star"></i>' : ''}
@@ -164,6 +218,7 @@ export const router = {
                     <button onclick="router.navigate('articles')" class="back-button">
                         <i class="fas fa-arrow-left"></i> 返回文章列表
                     </button>
+                </div>
                 </div>
             `;
         } catch (error) {

@@ -416,3 +416,123 @@ footer {
 .hljs-strong {
     font-weight: bold;
 }
+
+/* 文章详情容器 */
+.article-detail-container {
+    display: flex;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* 目录样式 */
+.toc {
+    width: 280px;
+    position: sticky;
+    top: 80px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.toc::-webkit-scrollbar {
+    width: 6px;
+}
+
+.toc::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+}
+
+.toc::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* 目录标题 */
+.toc::before {
+    content: "目录";
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+.toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.toc li {
+    margin: 12px 0;
+    line-height: 1.5;
+}
+
+.toc a {
+    text-decoration: none;
+    color: #555;
+    font-size: 15px;
+    display: block;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.toc a:hover {
+    color: #007bff;
+    background: rgba(0, 123, 255, 0.05);
+    transform: translateX(4px);
+}
+
+/* 当前活动标题高亮 */
+.toc a.active {
+    color: #007bff;
+    font-weight: 500;
+    background: rgba(0, 123, 255, 0.1);
+}
+
+/* 文章内容区域 */
+.article-detail {
+    flex: 1;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.markdown-content {
+    line-height: 1.8;
+    color: #333;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .article-detail-container {
+        flex-direction: column;
+        margin: 20px auto;
+    }
+    
+    .toc {
+        width: 100%;
+        position: static;
+        max-height: none;
+        margin-bottom: 20px;
+        box-shadow: none;
+        border: 1px solid #eee;
+    }
+
+    .article-detail {
+        padding: 20px;
+        box-shadow: none;
+    }
+}
