@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redirecting...</title>
+    <script>
+        (function(){
+            const path = window.location.pathname;
+            const base = '/YOUR_REPO_NAME/'; // 如果是项目站点改为 '/'
+            
+            // 处理两种情况：
+            // 1. username.github.io -> 重定向到/#home
+            // 2. username.github.io/path -> 重定向到/#path
+            if (path === '/' || path === '/index.html') {
+                window.location.href = base + '#home';
+            } else {
+                const route = path.split('/').pop();
+                window.location.href = base + '#' + route;
+            }
+        })();
+    </script>
+</head>
+<body>
+    Redirecting to the correct page...
+</body>
+</html>

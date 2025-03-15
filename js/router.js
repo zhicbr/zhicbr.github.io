@@ -1,7 +1,10 @@
 export const router = {
     init() {
         this.handleLocation();
+        window.addEventListener('popstate', () => this.handleLocation());
+        window.addEventListener('hashchange', () => this.handleLocation());
     },
+
 
     async navigate(page, params = {}) {
         const url = params.id ? `#${page}/${params.id}` : `#${page}`;
@@ -10,21 +13,21 @@ export const router = {
     },
 
     async handleLocation() {
-        const hash = window.location.hash.slice(1) || 'home';
-        const [page, id] = hash.split('/');
-        const content = await this.getContent(page, id);
-        document.getElementById('app').innerHTML = content;
-
-        // Initialize page-specific features only for desktop
-        if (!/Mobi|Android/i.test(navigator.userAgent)) {
-            if (page === 'home') {
-                import('./carousel.js').then(module => module.setupCarousel());
-                import('./typing.js').then(module => module.setupTyping());
-            }
-            if (page === 'articles' && id) {
-                this.setupTOC();
-            }
+        let hash = window.location.hash.slice(1);
+        
+        // 处理 GitHub Pages 直接路径访问
+        if(window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
+            const path = window.location.pathname.split('/').pop();
+            return this.navigate(path);
         }
+        
+        // 处理空hash和home路由
+        if (!hash || hash === 'home') {
+            return this.loadPage('home');
+        }
+        
+        const [page, id] = hash.split('/');
+        this.loadPage(page, id);
     },
 
     setupTOC() {

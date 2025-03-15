@@ -1,13 +1,17 @@
 class MobileRouter {
     constructor() {
         this.init();
+        // 添加异步处理确保DOM加载
+        setTimeout(() => this.handleLocation(), 50);
     }
 
     init() {
         this.setupViewport();
         this.setupNavigation();
+        window.addEventListener('hashchange', () => {
+            setTimeout(() => this.handleLocation(), 50);
+        }, false);
         this.handleLocation();
-        window.addEventListener('hashchange', () => this.handleLocation());
     }
 
     setupViewport() {
@@ -51,11 +55,32 @@ class MobileRouter {
     }
 
     handleLocation() {
-        const hash = window.location.hash.slice(1) || 'home';
+        let hash = window.location.hash.slice(1);
+        
+        // 处理 GitHub Pages 的直接访问
+        if(window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
+            const path = window.location.pathname.split('/').pop();
+            this.navigate(path);
+            return;
+        }
+        
+        // 处理空hash和home路由
+        if (!hash || hash === 'home') {
+            this.loadPage('home');
+            return;
+        }
+        
         const [page, id] = hash.split('/');
         this.loadPage(page, id);
+        
+        // 确保目录按钮初始化
+        if (page === 'articles' && id) {
+            setTimeout(() => this.setupMobileTOC(), 50);
+        }
     }
-
+    navigate(page) {
+        window.location.hash = page;
+    }
     async loadPage(page, id) {
         const app = document.getElementById('app');
         if (!app) {
@@ -69,7 +94,7 @@ class MobileRouter {
             case 'articles':
                 if (id) {
                     app.innerHTML = await this.loadArticleDetail(id);
-                    this.setupMobileTOC();
+                    this.setupMobileTOC(); // 确保立即初始化目录按钮
                 } else {
                     app.innerHTML = await router.getArticlesPage();
                 }
@@ -91,11 +116,12 @@ class MobileRouter {
             if (!article) {
                 return '<div class="error">文章不存在</div>';
             }
-
+    
             const markdownResponse = await fetch(`posts/${article.file}`);
             const markdownContent = await markdownResponse.text();
             const htmlContent = marked.parse(markdownContent);
-
+    
+            // 返回包含目录按钮的 HTML
             return `
                 <div class="article-detail-container">
                     <div class="mobile-toc-button" ontouchstart>

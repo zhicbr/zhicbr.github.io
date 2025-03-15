@@ -12,6 +12,20 @@
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js"></script>
 </head>
+<!-- 在 </body> 前添加 -->
+<script>
+    // 处理 GitHub Pages 的初始加载
+    if(window.location.hash === '' && window.location.pathname === '/') {
+        window.location.hash = '#home';
+    }
+    
+    // 兜底处理：500ms后检查内容是否加载
+    setTimeout(() => {
+        if(document.getElementById('app').innerHTML.trim() === '') {
+            router.navigate('home');
+        }
+    }, 500);
+</script>
 <body>
     <header>
         <div class="nav-content">
