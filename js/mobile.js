@@ -23,8 +23,19 @@ class MobileRouter {
         navToggle.innerHTML = '<i class="fas fa-bars"></i>';
         document.querySelector('.nav-content').appendChild(navToggle);
 
+        const navLinks = document.querySelector('.nav-links');
         navToggle.addEventListener('click', () => {
-            document.querySelector('.nav-links').classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // 点击导航项后关闭菜单并跳转
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = link.getAttribute('data-page');
+                router.navigate(page);
+                navLinks.classList.remove('active');
+            });
         });
     }
 
@@ -43,7 +54,7 @@ class MobileRouter {
             case 'articles':
                 if (id) {
                     app.innerHTML = await this.loadArticleDetail(id);
-                    this.setupMobileTOC(); // 添加移动端目录
+                    this.setupMobileTOC();
                 } else {
                     app.innerHTML = await router.getArticlesPage();
                 }
@@ -72,10 +83,13 @@ class MobileRouter {
 
             return `
                 <div class="article-detail-container">
-                    <div class="mobile-toc">
-                        <div class="toc-toggle">
+                    <div class="mobile-toc-button">
+                        <i class="fas fa-list"></i>
+                    </div>
+                    <div class="mobile-toc-panel">
+                        <div class="toc-header">
                             <span>目录</span>
-                            <i class="fas fa-chevron-down"></i>
+                            <i class="fas fa-times"></i>
                         </div>
                         <div class="toc-content"></div>
                     </div>
@@ -88,9 +102,7 @@ class MobileRouter {
                             <span class="date">${article.date}</span>
                             ${article.lastEdited ? `<span class="last-edited">最后编辑时间: ${article.lastEdited}</span>` : ''}
                             <div class="article-tags">
-                                ${article.tags.map(tag => `
-                                    <span class="tag">${tag}</span>
-                                `).join('')}
+                                ${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                             </div>
                         </div>
                         <div class="markdown-content">
@@ -111,51 +123,45 @@ class MobileRouter {
     setupMobileTOC() {
         const content = document.querySelector('.markdown-content');
         const tocContent = document.querySelector('.toc-content');
-        const tocToggle = document.querySelector('.toc-toggle');
-        if (!content || !tocContent) return;
+        const tocButton = document.querySelector('.mobile-toc-button');
+        const tocPanel = document.querySelector('.mobile-toc-panel');
+        const tocClose = document.querySelector('.toc-header .fa-times');
+        if (!content || !tocContent || !tocButton || !tocPanel) return;
 
         const headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
         let tocHTML = '<ul>';
-
         headings.forEach((heading, index) => {
             const level = parseInt(heading.tagName[1]);
             const id = `heading-${index}`;
             heading.id = id;
-            
             tocHTML += `
                 <li style="padding-left: ${(level - 1) * 16}px">
                     <a href="#${id}">${heading.textContent}</a>
                 </li>`;
         });
-
         tocHTML += '</ul>';
         tocContent.innerHTML = tocHTML;
 
-        // 平滑滚动
+        // 平滑滚动并关闭面板
         const links = tocContent.querySelectorAll('a');
         links.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const targetId = link.getAttribute('href').slice(1);
                 document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
-                // 点击后收起目录
-                tocContent.classList.remove('active');
-                tocToggle.querySelector('i').classList.replace('fa-chevron-up', 'fa-chevron-down');
+                tocPanel.classList.remove('active');
             });
         });
 
-        // 切换目录显示
-        tocToggle.addEventListener('click', () => {
-            tocContent.classList.toggle('active');
-            const icon = tocToggle.querySelector('i');
-            if (tocContent.classList.contains('active')) {
-                icon.classList.replace('fa-chevron-down', 'fa-chevron-up');
-            } else {
-                icon.classList.replace('fa-chevron-up', 'fa-chevron-down');
-            }
+        // 打开/关闭目录
+        tocButton.addEventListener('click', () => {
+            tocPanel.classList.toggle('active');
+        });
+        tocClose.addEventListener('click', () => {
+            tocPanel.classList.remove('active');
         });
 
-        // 高亮当前活动标题
+        // 高亮当前标题
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach(entry => {
@@ -168,7 +174,6 @@ class MobileRouter {
             },
             { rootMargin: '-100px 0px -50% 0px' }
         );
-
         headings.forEach(heading => observer.observe(heading));
     }
 }
