@@ -1,39 +1,35 @@
+// js/main.js
 import { setupCarousel } from './carousel.js';
 import { setupTyping } from './typing.js';
 import { setupDarkMode } from './darkmode.js';
 import { router } from './router.js';
 
-// Initialize components
-// main.js
 document.addEventListener('DOMContentLoaded', () => {
     setupDarkMode();
     
-    // 仅桌面端初始化 router.js 的路由
-    if (!/Mobi|Android/i.test(navigator.userAgent)) {
-        router.init();
-    }
+    // 所有设备都初始化基础路由
+    router.init();
     
-    // 通用导航点击事件（兼容移动端）
+    // 仅桌面端加载轮播和打字动画
+    if (!/Mobi|Android/i.test(navigator.userAgent)) {
+        import('./carousel.js').then(module => module.setupCarousel());
+        import('./typing.js').then(module => module.setupTyping());
+    }
+
+    // 通用导航点击事件
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const page = e.target.dataset.page;
-            if (/Mobi|Android/i.test(navigator.userAgent)) {
-                // 移动端使用 hash 直接跳转
-                window.location.hash = `#${page}`;
-            } else {
-                // 桌面端使用 router.navigate
-                router.navigate(page);
-            }
+            router.navigate(page);
         });
     });
 });
 
-// Handle browser navigation
+// 处理浏览器前进/后退
 window.addEventListener('popstate', () => {
     router.handleLocation();
 });
-
 // TOC Functions
 function setupTOC() {
     const tocContainer = document.querySelector('.article-toc');

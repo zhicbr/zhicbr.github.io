@@ -1,65 +1,88 @@
 // router.js
 export const router = {
     init() {
-        // 仅桌面端执行初始化
-        if (!/Mobi|Android/i.test(navigator.userAgent)) {
-            this.handleLocation();
-            window.addEventListener('popstate', () => this.handleLocation());
-            window.addEventListener('hashchange', () => this.handleLocation());
-        }
+        this.handleLocation();
+        window.addEventListener('popstate', () => this.handleLocation());
+        window.addEventListener('hashchange', () => this.handleLocation());
     },
 
-
-
     async navigate(page, params = {}) {
-        // 仅桌面端使用 pushState
-        if (!/Mobi|Android/i.test(navigator.userAgent)) {
-            const url = params.id ? `#${page}/${params.id}` : `#${page}`;
-            window.history.pushState({}, '', url);
-            await this.handleLocation();
-        }
+        const url = params.id ? `#${page}/${params.id}` : `#${page}`;
+        window.history.pushState({}, '', url);
+        await this.handleLocation();
     },
 
     async handleLocation() {
         let hash = window.location.hash.slice(1);
-        
+
         // 处理 GitHub Pages 直接路径访问
-        if(window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
+        if (window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
             const path = window.location.pathname.split('/').pop();
-            return this.navigate(path);
+            await this.navigate(path);
+            return;
         }
-        
+
         // 处理空hash和home路由
         if (!hash || hash === 'home') {
-            return this.loadPage('home');
+            await this.loadPage('home');
+            return;
         }
-        
+
         const [page, id] = hash.split('/');
-        this.loadPage(page, id);
+        await this.loadPage(page, id);
+    },
+
+    async loadPage(page, id) {
+        const app = document.getElementById('app');
+        if (!app) return;
+
+        try {
+            switch (page) {
+                case 'home':
+                    app.innerHTML = await this.getHomePage();
+                    if (!/Mobi|Android/i.test(navigator.userAgent)) {
+                        import('./carousel.js').then(module => module.setupCarousel());
+                        import('./typing.js').then(module => module.setupTyping());
+                    }
+                    break;
+                case 'articles':
+                    app.innerHTML = id ? await this.getArticleDetail(id) : await this.getArticlesPage();
+                    if (id) this.setupTOC();
+                    break;
+                case 'about':
+                    app.innerHTML = this.getAboutPage();
+                    break;
+                default:
+                    app.innerHTML = '<h1>404 - Page Not Found</h1>';
+            }
+        } catch (error) {
+            console.error('Error loading page:', error);
+            app.innerHTML = '<div class="error">页面加载失败</div>';
+        }
     },
 
     setupTOC() {
         const content = document.querySelector('.markdown-content');
         const tocContainer = document.querySelector('.toc');
         if (!content || !tocContainer) return;
-    
+
         const headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
         let tocHTML = '<ul>';
-    
+
         headings.forEach((heading, index) => {
             const level = parseInt(heading.tagName[1]);
             const id = `heading-${index}`;
             heading.id = id;
-            
+
             tocHTML += `
                 <li style="padding-left: ${(level - 1) * 16}px">
                     <a href="#${id}">${heading.textContent}</a>
                 </li>`;
         });
-    
+
         tocHTML += '</ul>';
         tocContainer.innerHTML = tocHTML;
-    
+
         const links = tocContainer.querySelectorAll('a');
         links.forEach(link => {
             link.addEventListener('click', (e) => {
@@ -68,7 +91,11 @@ export const router = {
                 document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
             });
         });
-    
+
+
+
+
+
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach(entry => {
@@ -81,7 +108,7 @@ export const router = {
             },
             { rootMargin: '-100px 0px -50% 0px' }
         );
-    
+
         headings.forEach(heading => observer.observe(heading));
     },
 
@@ -103,7 +130,7 @@ export const router = {
             const response = await fetch('posts/articles.json');
             const data = await response.json();
             const featuredArticles = data.articles.filter(article => article.featured);
-            
+
             return featuredArticles.map(article => `
                 <div class="article-card" onclick="router.navigate('articles', {id: '${article.id}'})">
                     <div class="featured-badge">
@@ -137,7 +164,13 @@ export const router = {
                     <div class="carousel-item active">
                         <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/1737119766339.jpg" alt="Random Image 1">
                     </div>
+
+
+
                     <div class="carousel-item">
+
+
+
                         <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/1737120461614.jpg" alt="Random Image 2">
                     </div>
                 </div>
@@ -157,7 +190,7 @@ export const router = {
             const response = await fetch('posts/articles.json');
             const data = await response.json();
             const { articles } = data;
-            
+
             return `
                 <h1>文章列表</h1>
                 <div class="article-list">
@@ -189,13 +222,14 @@ export const router = {
             const response = await fetch('posts/articles.json');
             const data = await response.json();
             const article = data.articles.find(a => a.id.toString() === id);
-            
+
             if (!article) {
                 return '<div class="error">文章不存在</div>';
             }
 
             const markdownResponse = await fetch(`posts/${article.file}`);
             const markdownContent = await markdownResponse.text();
+
             const htmlContent = marked.parse(markdownContent);
 
             return `
@@ -209,8 +243,11 @@ export const router = {
                         <div class="article-meta">
                             <span class="date">${article.date}</span>
                             ${article.lastEdited ? `<span class="last-edited">最后编辑时间: ${article.lastEdited}</span>` : ''}
+
                             <div class="article-tags">
                                 ${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+
+
                             </div>
                         </div>
                         <div class="markdown-content">
@@ -235,7 +272,7 @@ export const router = {
                  \o.O|
                  (___)
                    U      -->
-         
+
                 <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/profilephoto.jpg" alt="我的头像" class="avatar">
                 <h1>关于我</h1>
                 <p>欢迎来到我的个人博客！</p>
@@ -263,5 +300,6 @@ export const router = {
         `;
     }
 };
+
 
 window.router = router;
