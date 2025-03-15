@@ -285,36 +285,29 @@ class MobileRouter {
             return;
         }
 
-        const headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
-        let tocHTML = '<ul>';
-        headings.forEach((heading, index) => {
-            const level = parseInt(heading.tagName[1]);
-            const id = `heading-${index}`;
-            heading.id = id;
-            tocHTML += `
-                <li style="padding-left: ${(level - 1) * 16}px">
-                    <a href="#${id}">${heading.textContent}</a>
-                </li>`;
-        });
-        tocHTML += '</ul>';
-        tocContent.innerHTML = tocHTML;
-
-        // 平滑滚动并关闭面板
-        const links = tocContent.querySelectorAll('a');
-        links.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href').slice(1);
-                document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
-                tocPanel.classList.remove('active');
-            });
-        });
-
-        // 打开/关闭目录
-        const togglePanel = _.debounce(() => {
+        // 移除防抖函数依赖（避免需要 lodash）
+        const togglePanel = () => {
             tocPanel.classList.toggle('active');
-        }, 100);
+        };
 
+        // 绑定点击事件（直接操作，无需防抖）
+        tocButton.addEventListener('click', (e) => {
+            e.stopPropagation(); // 阻止事件冒泡
+            togglePanel();
+            if (window.navigator.vibrate) window.navigator.vibrate(15);
+        });
+
+        tocClose.addEventListener('click', (e) => {
+            e.stopPropagation();
+            tocPanel.classList.remove('active');
+        });
+
+        // 点击外部关闭面板
+        document.addEventListener('click', (e) => {
+            if (!tocPanel.contains(e.target) && !tocButton.contains(e.target)) {
+                tocPanel.classList.remove('active');
+            }
+        });
         tocButton.addEventListener('click', () => {
             togglePanel();
             // 添加触觉反馈 (需要设备支持)

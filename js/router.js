@@ -22,7 +22,7 @@ export const router = {
             return;
         }
 
-        // 处理空hash和home路由
+        // 处理空 hash 和 home 路由
         if (!hash || hash === 'home') {
             await this.loadPage('home');
             return;
@@ -47,7 +47,9 @@ export const router = {
                     break;
                 case 'articles':
                     app.innerHTML = id ? await this.getArticleDetail(id) : await this.getArticlesPage();
-                    if (id) this.setupTOC();
+                    if (id && !/Mobi|Android/i.test(navigator.userAgent)) {
+                        this.setupTOC(); // 仅桌面端初始化 TOC
+                    }
                     break;
                 case 'about':
                     app.innerHTML = this.getAboutPage();
@@ -91,10 +93,6 @@ export const router = {
                 document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
             });
         });
-
-
-
-
 
         const observer = new IntersectionObserver(
             (entries) => {
@@ -164,13 +162,7 @@ export const router = {
                     <div class="carousel-item active">
                         <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/1737119766339.jpg" alt="Random Image 1">
                     </div>
-
-
-
                     <div class="carousel-item">
-
-
-
                         <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/1737120461614.jpg" alt="Random Image 2">
                     </div>
                 </div>
@@ -229,7 +221,6 @@ export const router = {
 
             const markdownResponse = await fetch(`posts/${article.file}`);
             const markdownContent = await markdownResponse.text();
-
             const htmlContent = marked.parse(markdownContent);
 
             return `
@@ -243,11 +234,8 @@ export const router = {
                         <div class="article-meta">
                             <span class="date">${article.date}</span>
                             ${article.lastEdited ? `<span class="last-edited">最后编辑时间: ${article.lastEdited}</span>` : ''}
-
                             <div class="article-tags">
                                 ${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-
-
                             </div>
                         </div>
                         <div class="markdown-content">
@@ -268,11 +256,6 @@ export const router = {
     getAboutPage() {
         return `
             <div class="about-container">
-            <!-- ___/|
-                 \o.O|
-                 (___)
-                   U      -->
-
                 <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/profilephoto.jpg" alt="我的头像" class="avatar">
                 <h1>关于我</h1>
                 <p>欢迎来到我的个人博客！</p>
@@ -301,5 +284,5 @@ export const router = {
     }
 };
 
-
+// 确保 router 全局可用
 window.router = router;

@@ -167,7 +167,6 @@
 }
 
 .mobile-toc-panel {
-    position: fixed;
     right: -280px;
     top: 0;
     width: 260px;
@@ -175,8 +174,8 @@
     background: var(--bg-color);
     box-shadow: -2px 0 12px rgba(0, 0, 0, 0.1);
     transition: right 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1000;
-    display: none; /* 默认隐藏，仅移动端显示 */
+    z-index: 1000; /* 确保高于其他元素 */
+    display: none;
 }
 
 .mobile-toc-panel.active {
@@ -244,9 +243,7 @@
 
 /* Enable mobile TOC and navigation in mobile view */
 @media only screen and (max-width: 768px) {
-    .mobile-nav-toggle,
-    .mobile-toc-button,
-    .mobile-toc-panel {
-        display: flex;
+    .toc {
+        display: none !important;
     }
 }
