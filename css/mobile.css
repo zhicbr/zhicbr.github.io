@@ -24,12 +24,50 @@
     }
 
     .nav-links {
-        gap: 1rem;
-        font-size: 0.9rem;
+        display: none;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-radius: 0 0 12px 12px;
+        flex-direction: column;
+        padding: 10px 0;
+        z-index: 999;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        width: 100%;
+        margin: 0;
+        text-align: center;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 15px;
+        font-size: 18px;
+        color: #333;
+    }
+
+    .nav-links a:hover {
+        background: rgba(0, 123, 255, 0.05);
+        color: #007bff;
+    }
+
+    .mobile-nav-toggle {
+        display: block;
+        cursor: pointer;
+        font-size: 24px;
+        padding: 10px;
     }
 
     /* Main content */
-    main {
+    main#app {
         margin: 60px auto 1rem;
         padding: 0 0.5rem;
     }
@@ -41,7 +79,7 @@
         margin: 1rem auto;
     }
 
-    /* Article grid */
+    /* Article grid/list */
     .article-grid {
         grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
         gap: 1rem;
@@ -52,12 +90,36 @@
     }
 
     /* Article detail */
+    .article-detail-container {
+        flex-direction: column;
+        margin: 20px auto;
+        padding: 10px;
+    }
+
     .article-detail {
+        padding: 15px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Table of Contents (Desktop) - Hide in mobile */
+    .toc {
+        display: none;
+    }
+
+    /* Markdown content */
+    .markdown-content {
         padding: 1rem;
     }
 
-    .markdown-content {
-        padding: 1rem;
+    .markdown-content pre {
+        padding: 12px;
+        margin: 12px 0;
+    }
+
+    .markdown-content a {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        word-break: break-all;
     }
 
     /* About page */
@@ -69,17 +131,110 @@
         width: 150px;
         height: 150px;
     }
+}
 
-    /* Code blocks */
-    .markdown-content pre {
-        padding: 12px;
-        margin: 12px 0;
-    }
+/* Mobile TOC Button and Panel (outside media query to ensure global scope) */
+.mobile-nav-toggle {
+    display: none;
+}
 
-    /* Links */
-    .markdown-content a {
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        word-break: break-all;
+.mobile-toc-button {
+    position: fixed;
+    left: 10px;
+    top: 60%; /* 中心偏下 */
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: #007bff;
+    color: #fff;
+    border-radius: 50%;
+    display: none; /* 默认隐藏，仅移动端显示 */
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+.mobile-toc-button:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+
+.mobile-toc-panel {
+    position: fixed;
+    right: -300px;
+    top: 0;
+    width: 280px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+    transition: right 0.3s ease;
+    z-index: 999;
+    display: none; /* 默认隐藏，仅移动端显示 */
+}
+
+.mobile-toc-panel.active {
+    right: 0;
+}
+
+.toc-header {
+    padding: 15px;
+    background: #f8f9fa;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.toc-header span {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.toc-header .fa-times {
+    cursor: pointer;
+    font-size: 18px;
+    color: #666;
+}
+
+.toc-content {
+    padding: 15px;
+    overflow-y: auto;
+    height: calc(100% - 60px);
+}
+
+.toc-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.toc-content li {
+    margin: 10px 0;
+}
+
+.toc-content a {
+    text-decoration: none;
+    color: #555;
+    font-size: 14px;
+    display: block;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.toc-content a:hover,
+.toc-content a.active {
+    color: #007bff;
+    background: rgba(0, 123, 255, 0.05);
+}
+
+/* Enable mobile TOC in mobile view */
+@media only screen and (max-width: 768px) {
+    .mobile-toc-button,
+    .mobile-toc-panel {
+        display: flex;
     }
 }
