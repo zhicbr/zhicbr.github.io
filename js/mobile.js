@@ -28,7 +28,6 @@ class MobileRouter {
             navLinks.classList.toggle('active');
         });
 
-        // 点击导航项后关闭菜单并跳转
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -178,7 +177,6 @@ class MobileRouter {
     }
 }
 
-// Initialize mobile router
 if (/Mobi|Android/i.test(navigator.userAgent)) {
     const mobileRouter = new MobileRouter();
     window.mobileRouter = mobileRouter;

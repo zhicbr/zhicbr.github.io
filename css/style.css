@@ -251,85 +251,6 @@ main#app {
     background: var(--primary-color-dark);
 }
 
-
-.hljs {
-    display: block;
-    overflow-x: auto;
-    padding: 0.5em;
-    background: #f6f8fa;
-    color: #24292e;
-}
-
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-subst {
-    color: #d73a49;
-}
-
-.hljs-number,
-.hljs-literal,
-.hljs-variable,
-.hljs-template-variable,
-.hljs-tag .hljs-attr {
-    color: #005cc5;
-}
-
-.hljs-string,
-.hljs-doctag {
-    color: #032f62;
-}
-
-.hljs-title,
-.hljs-section,
-.hljs-selector-id {
-    color: #6f42c1;
-}
-
-.hljs-class .hljs-title {
-    color: #6f42c1;
-}
-
-.hljs-tag,
-.hljs-name,
-.hljs-attribute {
-    color: #22863a;
-}
-
-.hljs-regexp,
-.hljs-link {
-    color: #032f62;
-}
-
-.hljs-symbol,
-.hljs-bullet {
-    color: #e36209;
-}
-
-.hljs-built_in,
-.hljs-builtin-name {
-    color: #005cc5;
-}
-
-.hljs-meta {
-    color: #6a737d;
-}
-
-.hljs-deletion {
-    background: #ffeef0;
-}
-
-.hljs-addition {
-    background: #f0fff4;
-}
-
-.hljs-emphasis {
-    font-style: italic;
-}
-
-.hljs-strong {
-    font-weight: bold;
-}
-
 /* Table of Contents (Desktop) */
 .toc {
     width: 280px;
@@ -441,6 +362,85 @@ main#app {
     border: none;
 }
 
+/* Code Highlighting (Highlight.js) */
+.hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: #f6f8fa;
+    color: #24292e;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+    color: #d73a49;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+    color: #005cc5;
+}
+
+.hljs-string,
+.hljs-doctag {
+    color: #032f62;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+    color: #6f42c1;
+}
+
+.hljs-class .hljs-title {
+    color: #6f42c1;
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+    color: #22863a;
+}
+
+.hljs-regexp,
+.hljs-link {
+    color: #032f62;
+}
+
+.hljs-symbol,
+.hljs-bullet {
+    color: #e36209;
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+    color: #005cc5;
+}
+
+.hljs-meta {
+    color: #6a737d;
+}
+
+.hljs-deletion {
+    background: #ffeef0;
+}
+
+.hljs-addition {
+    background: #f0fff4;
+}
+
+.hljs-emphasis {
+    font-style: italic;
+}
+
+.hljs-strong {
+    font-weight: bold;
+}
+
 /* About Page */
 .about-container {
     max-width: 800px;
@@ -484,14 +484,14 @@ footer {
 .mobile-toc-button {
     position: fixed;
     left: 10px;
-    top: 50%;
+    top: 60%; /* 调整为中心偏下 */
     transform: translateY(-50%);
     width: 40px;
     height: 40px;
     background: #007bff;
     color: #fff;
     border-radius: 50%;
-    display: flex;
+    display: none; /* 默认隐藏，仅移动端显示 */
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -514,6 +514,7 @@ footer {
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
     transition: right 0.3s ease;
     z-index: 999;
+    display: none; /* 默认隐藏，仅移动端显示 */
 }
 
 .mobile-toc-panel.active {
@@ -626,13 +627,15 @@ footer {
         padding: 10px;
     }
 
+    /* 隐藏桌面端目录 */
     .toc {
-        width: 100%;
-        position: static;
-        max-height: none;
-        margin-bottom: 20px;
-        box-shadow: none;
-        border: 1px solid #eee;
+        display: none;
+    }
+
+    /* 显示移动端目录按钮和面板 */
+    .mobile-toc-button,
+    .mobile-toc-panel {
+        display: flex;
     }
 
     .article-detail {
