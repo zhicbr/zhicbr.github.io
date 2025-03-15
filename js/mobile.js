@@ -91,13 +91,23 @@ class MobileRouter {
             if (!article) {
                 return '<div class="error">文章不存在</div>';
             }
-    
+
             const markdownResponse = await fetch(`posts/${article.file}`);
             const markdownContent = await markdownResponse.text();
             const htmlContent = marked.parse(markdownContent);
-    
+
             return `
                 <div class="article-detail-container">
+                    <div class="mobile-toc-button" ontouchstart>
+                        <i class="fas fa-list"></i>
+                    </div>
+                    <div class="mobile-toc-panel">
+                        <div class="toc-header">
+                            <span>目录导航</span>
+                            <i class="fas fa-times" ontouchstart></i>
+                        </div>
+                        <div class="toc-content"></div>
+                    </div>
                     <div class="article-detail">
                         <h1>
                             ${article.featured ? '<i class="fas fa-star featured-star"></i>' : ''}
@@ -117,17 +127,6 @@ class MobileRouter {
                             <i class="fas fa-arrow-left"></i> 返回文章列表
                         </button>
                     </div>
-                    <!-- Mobile TOC elements -->
-                    <div class="mobile-toc-button">
-                        <i class="fas fa-list"></i>
-                    </div>
-                    <div class="mobile-toc-panel">
-                        <div class="toc-header">
-                            <span>目录</span>
-                            <i class="fas fa-times"></i>
-                        </div>
-                        <div class="toc-content"></div>
-                    </div>
                 </div>
             `;
         } catch (error) {
@@ -142,68 +141,68 @@ class MobileRouter {
         const tocButton = document.querySelector('.mobile-toc-button');
         const tocPanel = document.querySelector('.mobile-toc-panel');
         const tocClose = document.querySelector('.toc-header .fa-times');
-    
-        if (!content || !tocContent) {
-            console.error('TOC content elements not found');
+
+        if (!content || !tocContent || !tocButton || !tocPanel || !tocClose) {
+            console.error('TOC elements not found');
             return;
         }
-    
-        if (!tocButton || !tocPanel || !tocClose) {
-            console.error('TOC UI elements not found');
-            return;
-        }
-    
-        // Generate TOC content from headings
+
         const headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
         let tocHTML = '<ul>';
-        
         headings.forEach((heading, index) => {
             const level = parseInt(heading.tagName[1]);
             const id = `heading-${index}`;
             heading.id = id;
             tocHTML += `
                 <li style="padding-left: ${(level - 1) * 16}px">
-                    <a href="#${id}" class="toc-link">${heading.textContent}</a>
+                    <a href="#${id}">${heading.textContent}</a>
                 </li>`;
         });
-        
         tocHTML += '</ul>';
         tocContent.innerHTML = tocHTML;
-    
-        // Handle TOC link clicks with smooth scrolling
-        const links = tocContent.querySelectorAll('.toc-link');
+
+        // 平滑滚动并关闭面板
+        const links = tocContent.querySelectorAll('a');
         links.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const targetId = link.getAttribute('href').slice(1);
-                const targetElement = document.getElementById(targetId);
-                
-                if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
-                    // Close the TOC panel after clicking a link
-                    tocPanel.classList.remove('active');
-                }
+                document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+                tocPanel.classList.remove('active');
             });
         });
-    
-        // Toggle TOC panel when button is clicked
-        tocButton.addEventListener('click', () => {
+
+        // 打开/关闭目录
+        const togglePanel = _.debounce(() => {
             tocPanel.classList.toggle('active');
+        }, 100);
+
+        tocButton.addEventListener('click', () => {
+            togglePanel();
+            // 添加触觉反馈 (需要设备支持)
+            if (window.navigator.vibrate) {
+                window.navigator.vibrate(15);
+            }
         });
-    
-        // Close TOC panel when X is clicked
+
         tocClose.addEventListener('click', () => {
             tocPanel.classList.remove('active');
         });
-    
-        // Close TOC panel when clicking outside of it
+
+        // 点击外部关闭面板
         document.addEventListener('click', (e) => {
             if (!tocPanel.contains(e.target) && !tocButton.contains(e.target)) {
                 tocPanel.classList.remove('active');
             }
         });
-    
-        // Highlight current section in TOC
+
+        // 动态调整按钮位置
+        window.addEventListener('resize', () => {
+            const viewportHeight = window.innerHeight;
+            tocButton.style.top = `${viewportHeight * 0.7}px`;
+        });
+
+        // 高亮当前标题
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach(entry => {
@@ -216,7 +215,6 @@ class MobileRouter {
             },
             { rootMargin: '-100px 0px -50% 0px' }
         );
-        
         headings.forEach(heading => observer.observe(heading));
     }
 }

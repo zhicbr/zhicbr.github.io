@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="css/dark.css" disabled id="dark-theme">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js"></script>
 </head>
 <body>
     <header>
@@ -38,6 +40,14 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="js/mobile.js"></script>
     <script type="module" src="js/main.js"></script>
+    <script>
+        // 初始化 FastClick 消除点击延迟
+        if ('addEventListener' in document) {
+            document.addEventListener('DOMContentLoaded', function() {
+                FastClick.attach(document.body);
+            }, false);
+        }
+    </script>
 </body>
 </html>
 

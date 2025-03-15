@@ -145,38 +145,38 @@
 
 .mobile-toc-button {
     position: fixed;
-    left: 10px;
-    top: 60%; /* Middle of the screen, slightly lower */
+    left: 15px;
+    top: 70vh; /* 使用视口高度定位 */
     transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    background: #007bff;
+    width: 44px;
+    height: 44px;
+    background: var(--primary-color);
     color: #fff;
     border-radius: 50%;
-    display: flex; /* Change from 'none' to 'flex' */
+    display: none; /* 默认隐藏，仅移动端显示 */
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     cursor: pointer;
-    z-index: 1000;
-    transition: transform 0.3s ease;
+    z-index: 1001; /* 确保在面板上方 */
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.mobile-toc-button:hover {
-    transform: translateY(-50%) scale(1.1);
+.mobile-toc-button:active {
+    transform: translateY(-50%) scale(0.95);
 }
 
 .mobile-toc-panel {
     position: fixed;
-    right: -300px;
+    right: -280px;
     top: 0;
-    width: 280px;
+    width: 260px;
     height: 100%;
-    background: #fff;
-    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
-    transition: right 0.3s ease;
-    z-index: 999;
-    display: block; /* Change from 'none' to 'block' */
+    background: var(--bg-color);
+    box-shadow: -2px 0 12px rgba(0, 0, 0, 0.1);
+    transition: right 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    display: none; /* 默认隐藏，仅移动端显示 */
 }
 
 .mobile-toc-panel.active {
@@ -202,6 +202,12 @@
     cursor: pointer;
     font-size: 18px;
     color: #666;
+    padding: 8px;
+    transition: transform 0.2s ease;
+}
+
+.toc-header .fa-times:active {
+    transform: scale(0.9);
 }
 
 .toc-content {
@@ -237,9 +243,10 @@
 }
 
 /* Enable mobile TOC and navigation in mobile view */
-@media only screen and (min-width: 769px) {
+@media only screen and (max-width: 768px) {
+    .mobile-nav-toggle,
     .mobile-toc-button,
     .mobile-toc-panel {
-        display: none;
+        display: flex;
     }
 }
