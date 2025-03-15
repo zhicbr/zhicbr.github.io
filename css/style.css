@@ -536,3 +536,120 @@ footer {
         box-shadow: none;
     }
 }
+
+/* 移动端目录样式 */
+.mobile-toc {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+
+.toc-toggle {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 1px solid #eee;
+}
+
+.toc-toggle i {
+    transition: transform 0.3s ease;
+}
+
+.toc-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.toc-content.active {
+    max-height: 300px; /* 根据需要调整最大高度 */
+    overflow-y: auto;
+}
+
+.toc-content ul {
+    list-style: none;
+    padding: 10px 15px;
+    margin: 0;
+}
+
+.toc-content li {
+    margin: 10px 0;
+}
+
+.toc-content a {
+    text-decoration: none;
+    color: #555;
+    font-size: 14px;
+    display: block;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.toc-content a:hover,
+.toc-content a.active {
+    color: #007bff;
+    background: rgba(0, 123, 255, 0.05);
+}
+
+/* 调整文章内容样式 */
+.article-detail-container {
+    padding: 10px;
+}
+
+.article-detail {
+    padding: 15px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.markdown-content {
+    line-height: 1.6;
+}
+
+/* 导航样式（已有但确保存在） */
+.mobile-nav-toggle {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-nav-toggle {
+        display: block;
+        cursor: pointer;
+        font-size: 24px;
+        padding: 10px;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 15px;
+    }
+}
