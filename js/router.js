@@ -1,15 +1,23 @@
+// router.js
 export const router = {
     init() {
-        this.handleLocation();
-        window.addEventListener('popstate', () => this.handleLocation());
-        window.addEventListener('hashchange', () => this.handleLocation());
+        // 仅桌面端执行初始化
+        if (!/Mobi|Android/i.test(navigator.userAgent)) {
+            this.handleLocation();
+            window.addEventListener('popstate', () => this.handleLocation());
+            window.addEventListener('hashchange', () => this.handleLocation());
+        }
     },
 
 
+
     async navigate(page, params = {}) {
-        const url = params.id ? `#${page}/${params.id}` : `#${page}`;
-        window.history.pushState({}, '', url);
-        await this.handleLocation();
+        // 仅桌面端使用 pushState
+        if (!/Mobi|Android/i.test(navigator.userAgent)) {
+            const url = params.id ? `#${page}/${params.id}` : `#${page}`;
+            window.history.pushState({}, '', url);
+            await this.handleLocation();
+        }
     },
 
     async handleLocation() {

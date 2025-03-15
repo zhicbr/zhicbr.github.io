@@ -4,24 +4,29 @@ import { setupDarkMode } from './darkmode.js';
 import { router } from './router.js';
 
 // Initialize components
+// main.js
 document.addEventListener('DOMContentLoaded', () => {
     setupDarkMode();
+    
+    // 仅桌面端初始化 router.js 的路由
     if (!/Mobi|Android/i.test(navigator.userAgent)) {
         router.init();
-    } else {
-        // 移动端由 mobile.js 初始化
-        console.log('Mobile device detected, router handled by mobile.js');
     }
     
+    // 通用导航点击事件（兼容移动端）
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const page = e.target.dataset.page;
-            router.navigate(page);
+            if (/Mobi|Android/i.test(navigator.userAgent)) {
+                // 移动端使用 hash 直接跳转
+                window.location.hash = `#${page}`;
+            } else {
+                // 桌面端使用 router.navigate
+                router.navigate(page);
+            }
         });
     });
-    // Initialize TOC
-    setupTOC();
 });
 
 // Handle browser navigation
