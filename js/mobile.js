@@ -57,13 +57,6 @@ class MobileRouter {
     handleLocation() {
         let hash = window.location.hash.slice(1);
         
-        // 处理 GitHub Pages 的直接访问
-        if (window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
-            const path = window.location.pathname.split('/').pop();
-            this.navigate(path);
-            return;
-        }
-        
         // 处理空 hash 和 home 路由
         if (!hash || hash === 'home') {
             this.loadPage('home');
@@ -140,7 +133,7 @@ class MobileRouter {
             const featuredArticles = data.articles.filter(article => article.featured);
             
             return featuredArticles.map(article => `
-                <div class="article-card" onclick="mobileRouter.navigate('articles', {id: '${article.id}'})">
+                <div class="article-card" onclick="mobileRouter.navigate('articles', '${article.id}')">
                     <div class="featured-badge">
                         <i class="fas fa-star"></i> 精选
                     </div>
@@ -174,7 +167,7 @@ class MobileRouter {
                 <h1>文章列表</h1>
                 <div class="article-list">
                     ${articles.map(article => `
-                        <div class="article-card" onclick="mobileRouter.navigate('articles', {id: '${article.id}'})">
+                        <div class="article-card" onclick="mobileRouter.navigate('articles', '${article.id}')">
                             ${article.featured ? '<div class="featured-badge"><i class="fas fa-star"></i> 精选</div>' : ''}
                             <h2 class="article-title">${article.title}</h2>
                             <p class="article-excerpt">${article.excerpt || '文章简介...'}</p>
@@ -224,6 +217,9 @@ class MobileRouter {
     async loadArticleDetail(id) {
         try {
             const response = await fetch('posts/articles.json');
+            if (!response.ok) {
+                throw new Error('Failed to load articles.json');
+            }
             const data = await response.json();
             const article = data.articles.find(a => a.id.toString() === id);
             
@@ -232,6 +228,9 @@ class MobileRouter {
             }
 
             const markdownResponse = await fetch(`posts/${article.file}`);
+            if (!markdownResponse.ok) {
+                throw new Error('Failed to load article markdown');
+            }
             const markdownContent = await markdownResponse.text();
             const htmlContent = marked.parse(markdownContent);
 
