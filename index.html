@@ -7,25 +7,22 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/mobile.css">
     <link rel="stylesheet" href="css/dark.css" disabled id="dark-theme">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/marked/lib/marked.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="shortcut icon" type="image/x-icon" href="/public/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
 </head>
 <body>
     <header>
-        <nav>
-            <div class="nav-content">
-                <div class="logo">zhi的博客</div>
-                <ul class="nav-links">
-                    <li><a href="#" data-page="home">首页</a></li>
-                    <li><a href="#" data-page="articles">文章</a></li>
-                    <li><a href="#" data-page="about">关于我</a></li>
-                </ul>
-                <button id="dark-mode-toggle">
-                    <i class="fas fa-moon"></i>
-                </button>
-            </div>
-        </nav>
+        <div class="nav-content">
+            <div class="logo">zhi的博客</div>
+            <ul class="nav-links">
+                <li><a href="#" data-page="home">首页</a></li>
+                <li><a href="#" data-page="articles">文章</a></li>
+                <li><a href="#" data-page="about">关于我</a></li>
+            </ul>
+            <button id="dark-mode-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
     </header>
 
     <main id="app">
@@ -39,8 +36,8 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script type="module" src="js/main.js"></script>
     <script src="js/mobile.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>
 

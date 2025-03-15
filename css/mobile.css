@@ -17,6 +17,9 @@
 
     .nav-content {
         padding: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .logo {
@@ -52,6 +55,7 @@
         padding: 15px;
         font-size: 18px;
         color: #333;
+        text-decoration: none;
     }
 
     .nav-links a:hover {
@@ -64,6 +68,7 @@
         cursor: pointer;
         font-size: 24px;
         padding: 10px;
+        color: var(--text-color);
     }
 
     /* Main content */
@@ -231,8 +236,9 @@
     background: rgba(0, 123, 255, 0.05);
 }
 
-/* Enable mobile TOC in mobile view */
+/* Enable mobile TOC and navigation in mobile view */
 @media only screen and (max-width: 768px) {
+    .mobile-nav-toggle,
     .mobile-toc-button,
     .mobile-toc-panel {
         display: flex;

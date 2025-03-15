@@ -6,9 +6,13 @@ import { router } from './router.js';
 // Initialize components
 document.addEventListener('DOMContentLoaded', () => {
     setupDarkMode();
-    router.init();
+    if (!/Mobi|Android/i.test(navigator.userAgent)) {
+        router.init();
+    } else {
+        // 移动端由 mobile.js 初始化
+        console.log('Mobile device detected, router handled by mobile.js');
+    }
     
-    // Setup navigation
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();

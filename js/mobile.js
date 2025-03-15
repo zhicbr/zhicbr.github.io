@@ -18,12 +18,24 @@ class MobileRouter {
     }
 
     setupNavigation() {
+        const navContent = document.querySelector('.nav-content');
+        if (!navContent) {
+            console.error('Navigation container .nav-content not found');
+            return;
+        }
+
+        // 添加移动端导航切换按钮
         const navToggle = document.createElement('div');
         navToggle.className = 'mobile-nav-toggle';
         navToggle.innerHTML = '<i class="fas fa-bars"></i>';
-        document.querySelector('.nav-content').appendChild(navToggle);
+        navContent.appendChild(navToggle);
 
         const navLinks = document.querySelector('.nav-links');
+        if (!navLinks) {
+            console.error('Navigation links .nav-links not found');
+            return;
+        }
+
         navToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
         });
@@ -46,6 +58,10 @@ class MobileRouter {
 
     async loadPage(page, id) {
         const app = document.getElementById('app');
+        if (!app) {
+            console.error('App container #app not found');
+            return;
+        }
         switch(page) {
             case 'home':
                 app.innerHTML = await router.getHomePage();
@@ -125,7 +141,11 @@ class MobileRouter {
         const tocButton = document.querySelector('.mobile-toc-button');
         const tocPanel = document.querySelector('.mobile-toc-panel');
         const tocClose = document.querySelector('.toc-header .fa-times');
-        if (!content || !tocContent || !tocButton || !tocPanel) return;
+
+        if (!content || !tocContent || !tocButton || !tocPanel || !tocClose) {
+            console.error('TOC elements not found');
+            return;
+        }
 
         const headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
         let tocHTML = '<ul>';

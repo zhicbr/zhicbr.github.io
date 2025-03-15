@@ -15,13 +15,15 @@ export const router = {
         const content = await this.getContent(page, id);
         document.getElementById('app').innerHTML = content;
 
-        // Initialize page-specific features
-        if (page === 'home') {
-            import('./carousel.js').then(module => module.setupCarousel());
-            import('./typing.js').then(module => module.setupTyping());
-        }
-        if (page === 'articles' && id) {
-            this.setupTOC();
+        // Initialize page-specific features only for desktop
+        if (!/Mobi|Android/i.test(navigator.userAgent)) {
+            if (page === 'home') {
+                import('./carousel.js').then(module => module.setupCarousel());
+                import('./typing.js').then(module => module.setupTyping());
+            }
+            if (page === 'articles' && id) {
+                this.setupTOC();
+            }
         }
     },
 
@@ -47,7 +49,6 @@ export const router = {
         tocHTML += '</ul>';
         tocContainer.innerHTML = tocHTML;
     
-        // 平滑滚动
         const links = tocContainer.querySelectorAll('a');
         links.forEach(link => {
             link.addEventListener('click', (e) => {
@@ -57,7 +58,6 @@ export const router = {
             });
         });
     
-        // 高亮当前活动标题
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach(entry => {
@@ -108,7 +108,7 @@ export const router = {
                         </div>
                     </div>
                     <div class="article-views">
-                       <!-- <i class="fas fa-eye"></i> ${article.views} 次浏览 -->
+                        <!-- <i class="fas fa-eye"></i> ${article.views} 次浏览 -->
                     </div>
                 </div>
             `).join('');
@@ -126,12 +126,6 @@ export const router = {
                     <div class="carousel-item active">
                         <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/1737119766339.jpg" alt="Random Image 1">
                     </div>
-        <!--             <div class="carousel-item">
-                        <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/1737119839503.png" alt="Random Image ">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/1737120086778.jpeg" alt="Random Image ">  
-                    </div>        -->
                     <div class="carousel-item">
                         <img src="https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/1737120461614.jpg" alt="Random Image 2">
                     </div>
@@ -191,34 +185,30 @@ export const router = {
 
             const markdownResponse = await fetch(`posts/${article.file}`);
             const markdownContent = await markdownResponse.text();
-            // Use marked.js for markdown rendering
             const htmlContent = marked.parse(markdownContent);
 
             return `
-            <div class="article-detail-container">
-                <div class="toc"></div>
-                <div class="article-detail">
-                    <h1>
-                        ${article.featured ? '<i class="fas fa-star featured-star"></i>' : ''}
-                        ${article.title}
-                    </h1>
-                    <div class="article-meta">
-                        <span class="date">${article.date}</span>
-                     ${article.lastEdited ? `<span class="last-edited">最后编辑时间: ${article.lastEdited}</span>` : ''}
-                        <!-- <span class="views"><i class="fas fa-eye"></i> ${article.views} 次浏览</span> -->
-                        <div class="article-tags">
-                            ${article.tags.map(tag => `
-                                <span class="tag">${tag}</span>
-                            `).join('')}
+                <div class="article-detail-container">
+                    <div class="toc"></div>
+                    <div class="article-detail">
+                        <h1>
+                            ${article.featured ? '<i class="fas fa-star featured-star"></i>' : ''}
+                            ${article.title}
+                        </h1>
+                        <div class="article-meta">
+                            <span class="date">${article.date}</span>
+                            ${article.lastEdited ? `<span class="last-edited">最后编辑时间: ${article.lastEdited}</span>` : ''}
+                            <div class="article-tags">
+                                ${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                            </div>
                         </div>
+                        <div class="markdown-content">
+                            ${htmlContent}
+                        </div>
+                        <button onclick="router.navigate('articles')" class="back-button">
+                            <i class="fas fa-arrow-left"></i> 返回文章列表
+                        </button>
                     </div>
-                    <div class="markdown-content">
-                        ${htmlContent}
-                    </div>
-                    <button onclick="router.navigate('articles')" class="back-button">
-                        <i class="fas fa-arrow-left"></i> 返回文章列表
-                    </button>
-                </div>
                 </div>
             `;
         } catch (error) {
@@ -263,5 +253,4 @@ export const router = {
     }
 };
 
-// Make router globally accessible
 window.router = router;
