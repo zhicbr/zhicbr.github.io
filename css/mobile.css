@@ -146,14 +146,14 @@
 .mobile-toc-button {
     position: fixed;
     left: 10px;
-    top: 60%; /* 中心偏下 */
+    top: 60%; /* Middle of the screen, slightly lower */
     transform: translateY(-50%);
     width: 40px;
     height: 40px;
     background: #007bff;
     color: #fff;
     border-radius: 50%;
-    display: none; /* 默认隐藏，仅移动端显示 */
+    display: flex; /* Change from 'none' to 'flex' */
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -176,7 +176,7 @@
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
     transition: right 0.3s ease;
     z-index: 999;
-    display: none; /* 默认隐藏，仅移动端显示 */
+    display: block; /* Change from 'none' to 'block' */
 }
 
 .mobile-toc-panel.active {
@@ -237,10 +237,9 @@
 }
 
 /* Enable mobile TOC and navigation in mobile view */
-@media only screen and (max-width: 768px) {
-    .mobile-nav-toggle,
+@media only screen and (min-width: 769px) {
     .mobile-toc-button,
     .mobile-toc-panel {
-        display: flex;
+        display: none;
     }
 }
