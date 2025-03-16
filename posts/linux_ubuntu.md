@@ -41,7 +41,13 @@ chenbaorui@anlinling:~$
 
 由于虚拟机“详见下文冲突”，关闭了wsl，应该再次开启就可以了。
 
+## 移动硬盘易断连
 
+由于我的虚拟机是安装在移动硬盘里的，除了避免碰到接口导致断开，以下设置至关重要：
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250316145552708.png)
+
+这样设置后，没有出现过断开的情况，否则没几分钟就断了。
 
 ## 虚拟机安装ubuntu
 
@@ -390,7 +396,9 @@ chmod +x test.sh
 
 ## wsl和vmware冲突
 
-由于虚拟机里的ubuntu经常卡死，开启了：
+由于虚拟机里的ubuntu经常卡死，
+
+开启了：
 
 ![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250308111345401.png)
 
@@ -589,3 +597,5 @@ gcc hello.c -o hello_c
 [VMWare Linux 虚拟机配置永久共享文件夹 | Eclipsed-Y-Blog](https://eclipsed-y.github.io/blogs/vmware-shared/)
 
 [VMware虚拟机网络配置-NAT篇 - 知乎](https://zhuanlan.zhihu.com/p/130984945)
+
+[移动硬盘频繁断开连接怎么办？_移动硬盘闪退-CSDN博客](https://blog.csdn.net/jiamisoft/article/details/133856951)
