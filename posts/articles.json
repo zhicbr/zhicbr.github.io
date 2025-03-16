@@ -85,7 +85,7 @@
             "id":12,
             "title":"下载linux",
             "date":"2025-03-2",
-            "lastEdited": "2025-03-14", 
+            "lastEdited": "2025-03-16", 
             "tags":["linux"],
             "views":0,
             "file":"linux_ubuntu.md",
@@ -101,6 +101,28 @@
             "file":"Getting_Started_with_Express.md",
             "featured":false,
             "excerpt": "使用Express快速搭建Node.js后端服务"
+        },
+        {
+            "id":14,
+            "title":"windows小知识",
+            "date":"2025-03-16",
+            "lastEdited": "2025-03-16", 
+            "tags":["windows"],
+            "views":0,
+            "file":"windows_tips_and_tricks.md",
+            "featured":false,
+            "excerpt": "windows的各种小技巧和技能"
+        },
+        {
+            "id":15,
+            "title":"本地模型部署尝试",
+            "date":"2025-03-16",
+            "lastEdited": "2025-03-16", 
+            "tags":["ollama","AI"],
+            "views":0,
+            "file":"ollama_use.md",
+            "featured":false,
+            "excerpt": "使用ollama等工具进行本地模型部署"
         }
     ]
 }
