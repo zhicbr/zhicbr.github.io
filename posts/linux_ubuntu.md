@@ -522,6 +522,16 @@ ubuntu20G快要用完了，需要扩容
 
 由于我一开始并没有逻辑空间和扩展空间，我之后只是留了2000mb，并没有创建……## 
 
+
+
+## 关闭干净虚拟机
+
+以下设置，选当虚拟机开机时
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250318152913621.png)
+
+不行不行，只是系统托盘不显示图标，还是有进程在，还是得手动关闭进程或者用批处理文件关闭。
+
 ## C/C++编程
 
 C++:
