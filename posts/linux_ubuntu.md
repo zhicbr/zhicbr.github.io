@@ -75,6 +75,10 @@ ctrl+shift+v
 
 或：左键选中，滚轮点击后复制
 
+#### 显示隐藏文件
+
+ctrl+h
+
 #### 切换输入法
 
 shift
@@ -580,6 +584,77 @@ gcc hello.c -o hello_c
 
 
 
+## 下载qt
+
+qt官网
+
+[Download Qt OSS: Get Qt Online Installer](https://www.qt.io/download-qt-installer-oss)
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250324142606573.png)
+
+将下载的.run放到linux中，点击即可运行安装程序
+
+
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250324142446285.png)
+
+
+
+选择桌面开发
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250324143030864.png)
+
+不改动也可以
+
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250324143231672.png)
+
+
+
+中途需要安装这个，在终端运行就行了：sudo apt install libxcb-cursor0 libxcb-cursor-dev
+
+
+
+## git，github
+
+### 安装git
+
+```
+sudo apt-get install git
+```
+
+### 设置用户名，邮箱
+
+```
+git config --global user.name "ChenBaorui"
+git config --global user.email "2819579493@qq.com"
+```
+
+### clone
+
+将github上的仓库克隆到本地
+
+使用https
+
+直接在ubuntu终端使用git clone，没有密码输入要求，就可以克隆到本地
+
+### git push
+
+修改hosts文件
+
+```
+20.205.243.166 github.com
+162.125.83.1 github.global.ssl.fastly.net
+20.205.243.165 codeload.Github.com
+```
+
+在vscode的git中，git push，会要求登录github，在浏览器中确认一下，再回到vscode，直接就push了，也没有输入密码/用户名。
+
+### 设置代理
+
+还可以设置代理，挂梯子。设置了hosts，就不设置这个了。
+
+
+
 
 
 ## 参考
@@ -609,3 +684,7 @@ gcc hello.c -o hello_c
 [VMware虚拟机网络配置-NAT篇 - 知乎](https://zhuanlan.zhihu.com/p/130984945)
 
 [移动硬盘频繁断开连接怎么办？_移动硬盘闪退-CSDN博客](https://blog.csdn.net/jiamisoft/article/details/133856951)
+
+[Linux 系统（Ubuntu）下安装 Qt 环境_ubuntu安装qt-CSDN博客](https://blog.csdn.net/YMGogre/article/details/130565726)
+
+[GitHub push失败-Failed to connect to github.com port 443: Timed out_github推送不上去 faid to connect-CSDN博客](https://blog.csdn.net/weixin_43160744/article/details/119054656)
