@@ -6,17 +6,17 @@
 
 vscode
 
-![image-20250120115142748](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images//image-20250120115142748.png)
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250120115142748-1742957003373-1.png)
 
 idea
 
-![image-20250120115214065](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250120115214065.png)
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250120115214065-1742957014924-3.png)
 
 如果是master，直接update到最新就行了
 
 如果是分支a，切换到master，然后update到最新，再切换回分支a，a分支与master落后提交，即需要将master的更新同步到a分支，在本地分支，Merge'master' into 'a',然后push到a的远程分支，即可实现a分支同步更新。
 
-![image-20241201104844136](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20241201104844136.png)
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20241201104844136-1742957022027-5.png)
 
 
 
@@ -28,12 +28,23 @@ idea
 
 ## git
 
+设置用户名，邮箱
+
+```
+git config --global user.name "ChenBaorui"
+git config --global user.email "2819579493@qq.com"
+```
+
+
+
 查密码,姓名,邮箱
 
 ```
 git config user.password
 git config user.name
 git config user.email
+或  
+git config --list
 ```
 
 让项目push时不用每次都写用户名和密码
@@ -132,13 +143,23 @@ git config --global --get http.https://github.com.proxy
 git config --global -l
 ```
 
+## 修改hosts
 
+另可以修改host文件实现访问github。
 
-另可以修改hosts文件实现访问github。
-hosts文件位置："C:\Windows\System32\drivers\etc\hosts"
-在文件末尾添加
+windows:C:\Windows\System32\drivers\etc\hosts
+
+linux:etc\hosts
+
+在hosts文件后添加即可
+
+```
 20.205.243.166 github.com
-ip地址通过ping查询，两种都设置可。
+162.125.83.1 github.global.ssl.fastly.net
+20.205.243.165 codeload.Github.com
+```
+
+
 
 
 
@@ -149,28 +170,23 @@ ip地址通过ping查询，两种都设置可。
 
 
 1. **443端口**：
-
 - 这是 HTTPS 协议的标准端口
 - 用于你的 Git 客户端和 GitHub 服务器之间的加密通信
 - 这个端口是在 GitHub 服务器端开放的
-
 ```plaintext
 你的电脑 ----> GitHub服务器:443
 ```
 
 2. **代理端口（如1080）**：
-
 - 这是你本地代理软件使用的端口
 - 用于在你的电脑和代理服务器之间建立连接
 - 这个端口是在你本地电脑上的
-
 ```plaintext
 完整的连接路径：
 你的Git客户端 -> 本地1080端口 -> 代理服务器 -> GitHub:443
 ```
 
 3. **在git push过程中的工作流程**：
-
 ```plaintext
 [你的Git客户端] ---> [本地代理:1080] ---> [代理服务器] ---> [GitHub:443]
      |                     |                    |                |
@@ -180,7 +196,6 @@ ip地址通过ping查询，两种都设置可。
 ```
 
 所以：
-
 - 1080端口（或其他代理端口）是用来"翻墙"的
 - 443端口是用来进行安全通信的
 - 这两个端口在整个过程中承担不同的职责，互不影响
@@ -188,14 +203,12 @@ ip地址通过ping查询，两种都设置可。
 ## git和浏览器处理代理
 
 1. **浏览器的代理设置**：
-
 - 浏览器会自动读取系统的代理设置或其自身的代理设置
 - 当你开启代理软件（如 Clash）时，它会自动配置系统代理
 - 浏览器会自动识别并使用这些系统代理设置
 - 所以你不需要额外配置，开启代理后就能直接访问
 
 2. **Git 的代理处理**：
-
 - Git 是一个命令行工具，默认不会读取系统的代理设置
 - 它需要单独配置自己的代理设置
 - 这样设计的原因是：
@@ -204,8 +217,7 @@ ip地址通过ping查询，两种都设置可。
   - 确保在不同环境下（如服务器）有可预测的行为
 
 3. **如何让 Git 自动使用系统代理**：
-   如果你想让 Git 也使用系统代理，可以设置环境变量：
-
+如果你想让 Git 也使用系统代理，可以设置环境变量：
 ```bash
 # Windows
 set http_proxy=socks5://127.0.0.1:1080
@@ -235,4 +247,4 @@ git config --global credential.helper store
 
 远程仓库身份认证，不必每次上传都使用用户名和密码
 
-![image-20250120115442352](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250120115442352.png)
+![](https://raw.githubusercontent.com/zhicbr/zhicbr.github.io/refs/heads/main/images/image-20250120093231899.png)
