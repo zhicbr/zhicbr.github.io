@@ -1,6 +1,5 @@
 export function setupTyping() {
     const quotes = [
-        "只恐西风又惊秋，不觉暗中流年换。",
         "Opportunity does not waste time with those who are unprepared.",
         "活着本身就很妙，如果连这道理都不懂，怎么去探索更深的东西呢？",
         "厚积薄发",

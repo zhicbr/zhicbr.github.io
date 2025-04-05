@@ -278,10 +278,10 @@ export const router = {
                 <p>欢迎来到我的个人博客！</p>
                 <section>
                     <h2>个人介绍</h2>
-                    <p>我是一名热爱技术和创新的开发者，专注于Web开发和人工智能领域。</p>
+                    <p>我是一名热爱技术和创新的开发者，专注于……偷懒</p>
                 </section>
                 <section>
-                    <h2>也许</h2>
+                    <h2>……</h2>
                     <blockquote>"……"</blockquote>
                 </section>
                 <section>
